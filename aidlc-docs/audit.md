@@ -312,3 +312,19 @@ Representative case: `ctx-aidlc-run` STEP 1-A detects multi-feature → guides r
 - Action: completed
 - Reason: 사용자가 "도시락 일기 KMP 프로젝트 — Claude/AIDLC 실행 프롬프트" 문서 제공. §1 환경 진단은 기충족(코어 ~/work/aidlc-workflow, graphify 게이트 0). §2 프로필을 CTX source of truth로 반영. 프로덕션 코드 미생성, §3 로드맵 진행 전 정지
 - Outputs: ctx/project-profile.ctx.md(전면 갱신 — 승인 스택/아키텍처 원칙/Gradle 원칙/Forbidden), ctx/INDEX.md(제품명, ADR 승인 제약 2건 추가)
+
+## [STEP-R1~R6] Phase 0 Roadmapping — completed
+- Timestamp: 2026-08-27T19:00:00+09:00
+- Feature: roadmap
+- Step: STEP-R1~R6
+- Action: completed
+- Reason: 사용자 입력 "이 세션에서 바로 로드맵 진행해주세요". prepared-requirement(_source-plan.md 스냅샷) 검증 — 빈 영역 0, 모순 1(:core:designsystem vs 단일 모듈 원칙 → Open Item #1), 열어둔 결정 10건은 피처별 이관. 분해: F-0(design-system 기완료 소급) + F-1~F-7. ⚠ 공유 리소스 5건 전부 single-owner로 해소, 순환 없음. Phase 1~4 배치
+- Outputs: aidlc-docs/_source-plan.md, aidlc-docs/_roadmap.md, aidlc-state.md 동기화
+
+## [GATE-0] Roadmap Review
+- Timestamp: 2026-08-27T19:20:00+09:00
+- Feature: roadmap
+- Gate: GATE-0
+- Decision: approved
+- User Input: "검토 완료. 단 피쳐 별 핸드오프 명령은 이후에 진행.\n\n변경된 파일 브랜치 만들필요 없다면 현재 메인 브랜치에서 에맨드 커밋 진행."
+- Notes: 사용자가 _roadmap.md 제목 직접 수정(1줄). 피처별 핸드오프는 보류 — 사용자 요청 시 개시. 로드맵 커밋에 amend 반영

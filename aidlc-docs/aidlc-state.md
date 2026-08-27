@@ -11,7 +11,7 @@ Update rules:
 ## Project Information
 - Project Type: brownfield (KMP 템플릿, 도메인 코드 없음)
 - Start Date: 2026-08-27
-- Current Stage: 구현 대기 (워크트리에서 /ctx-run)
+- Current Stage: GATE-0 승인 완료 — 피처별 /ctx-aidlc-run 대기 (핸드오프는 사용자 요청 시)
 - Current Feature: design-system
 
 ## Workspace State
@@ -20,23 +20,37 @@ Update rules:
 - Workspace Root: /Users/yoontaeseong/study/mymeal
 
 ## Roadmap State
-- Roadmap Path: `aidlc-docs/_roadmap.md` (none)
-- Multi-Feature Mode: no
-- GATE-0 Decision: not-applicable (single-feature)
-- Last Roadmap Update: n/a
+- Roadmap Path: `aidlc-docs/_roadmap.md` (approved)
+- Multi-Feature Mode: yes
+- GATE-0 Decision: approved (2026-08-27)
+- Last Roadmap Update: 2026-08-27
 
 ## Feature Index
 
 | Slug | Status | Roadmap Source | Owner |
 |------|--------|----------------|-------|
-| design-system | active | standalone | yts0646 |
+| design-system | completed | F-0 (소급 편입) | yts0646 |
+| app-foundation | ready | F-1 | yts0646 |
+| data-foundation | ready | F-2 | yts0646 |
+| record | ready | F-3 | yts0646 |
+| food-analysis | ready | F-4 | yts0646 |
+| diary | ready | F-5 | yts0646 |
+| account-sync | ready | F-6 | yts0646 |
+| settings-privacy | ready | F-7 | yts0646 |
 
 Status values: active / completed / parked
 Roadmap Source values: `_roadmap.md` item ID or `standalone` (a single feature outside the roadmap)
 
 ## Cross-Feature Dependencies
 
-Not applicable.
+| Source Feature | Depends On | Shared Resource | Resolution |
+|----------------|------------|-----------------|------------|
+| F-3 record | F-1, F-2 | Nav/DI 골격, DB·이미지 저장 | serialized |
+| F-4 food-analysis | F-3 | record 플로우 진입점 | serialized |
+| F-5 diary | F-1, F-2 | Nav/DI 골격, DB 조회 | serialized |
+| F-6 account-sync | F-1, F-2 | DB 스키마 migration, 이미지 저장소 | serialized |
+| F-7 settings-privacy | F-1, F-6 | Nav 골격, Supabase 계정 API | serialized |
+| F-1/F-2 상호 | 없음 | Gradle 파일만 접점 (커밋 분리 규약) | parallel-safe |
 
 Resolution values: `foundation-extracted` / `serialized` / `parallel-safe` / `unresolved`
 If the table is empty, write "Not applicable".
@@ -64,14 +78,13 @@ If the table is empty, write "Not applicable".
 - api-contract: disabled (API 변경 없음)
 
 ## Roadmap Phase Progress (multi-feature only)
-- [-] 전체 스킵 (single-feature)
-- [ ] STEP R1: Input Validation (prepared-requirement only)
-- [ ] STEP R2: Feature Decomposition
-- [ ] STEP R3: Resource Matrix
-- [ ] STEP R4: Dependency Graph
-- [ ] STEP R5: Allocation Recommendation
-- [ ] STEP R6: Roadmap File Output
-  - [ ] GATE-0: Roadmap Review
+- [x] STEP R1: Input Validation (prepared-requirement only)
+- [x] STEP R2: Feature Decomposition (F-0 기완료 + F-1~F-7)
+- [x] STEP R3: Resource Matrix (⚠ 5건)
+- [x] STEP R4: Dependency Graph (⚠ 전건 해소, 순환 없음)
+- [x] STEP R5: Allocation Recommendation (Phase 1~4)
+- [x] STEP R6: Roadmap File Output
+  - [x] GATE-0: Roadmap Review (approved 2026-08-27)
 
 For a single feature, mark the whole section `[-]` and record "single-feature" as the reason.
 
