@@ -266,3 +266,18 @@ Representative case: `ctx-aidlc-run` STEP 1-A detects multi-feature → guides r
 - To: ctx-worktree
 - Reason: 사용자가 워크트리 격리 구현을 명시 요청 (단일 기능이나 병렬 작업 계획 있음)
 - Resume Hint: 워크트리 생성 후 해당 워크트리에서 /ctx-run 실행
+
+## [STEP] ctx-run Implementation — completed
+- Timestamp: 2026-08-27T17:10:00+09:00
+- Feature: design-system
+- Step: ctx-run ROLE 0~6
+- Action: completed
+- Reason: ROLE 0 architect(판단불가 0) → 설계검증 PASS → ROLE 1 구현(빌드 PASSED) → ROLE 2 테스트 6/6 → ROLE 3 리뷰(위반 0, 규칙 2건 식별) → ROLE 4 CTX 반영(INDEX.md 3건) → ROLE 5 정제(22→15규칙) → ROLE 6 커밋 플랜 5건
+- Outputs: core/designsystem 모듈 (build.gradle + kt 5 + test 1), shared 적용 2파일, ctx 2파일, 커밋 플랜
+
+## [STATUS] status change
+- Timestamp: 2026-08-27T17:10:00+09:00
+- Feature: design-system
+- Previous: approved
+- Current: implemented
+- Trigger: 구현/검증 완료, 커밋 플랜 확정
