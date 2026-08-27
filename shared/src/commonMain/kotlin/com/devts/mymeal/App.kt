@@ -14,6 +14,7 @@ import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
+import com.devts.mymeal.core.designsystem.SikdorokTheme
 import org.jetbrains.compose.resources.painterResource
 
 import mymeal.shared.generated.resources.Res
@@ -22,7 +23,7 @@ import mymeal.shared.generated.resources.compose_multiplatform
 @Composable
 @Preview
 fun App() {
-    MaterialTheme {
+    SikdorokTheme {
         var showContent by remember { mutableStateOf(false) }
         Column(
             modifier = Modifier
