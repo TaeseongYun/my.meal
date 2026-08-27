@@ -18,3 +18,8 @@ captures
 **/xcshareddata/WorkspaceSettings.xcsettings
 node_modules/
 .codegraph/
+
+# graphify code-graph output (per-worktree, not shared)
+graphify-out/
+.graphify/
+graphify-out
