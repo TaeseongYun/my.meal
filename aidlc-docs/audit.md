@@ -296,3 +296,11 @@ Representative case: `ctx-aidlc-run` STEP 1-A detects multi-feature → guides r
 - Previous: implemented
 - Current: merged
 - Trigger: 리모트 origin(github.com/TaeseongYun/my.meal) 설정, main+design-system 푸시, PR #1 생성("pr 생성해주세요 그리고 머지되면 워크트리도 제거되게 처리해주세요."), 사용자 머지(스쿼시, c450ced). 머지 감시 모니터가 감지 → 워크트리/로컬 브랜치 제거, main 최신화 완료
+
+## [STEP] Workflow Core Sync — completed
+- Timestamp: 2026-08-27T18:00:00+09:00
+- Feature: (project-level)
+- Step: core-sync
+- Action: completed
+- Reason: 활성 코어가 ~/work/aidlc-workflow 로 이동 + graphify가 기본 그래프 기반으로 변경(워크트리별 그래프 격리, 머지 후 main 그래프 재생성 규칙). 사용자 입력: "work/aidlc-workflow 부분에 워크트리에 대한 내용이 바뀌었습니다. 내용을 보고 여기 싱크를 맞춰주세요."
+- Outputs: CLAUDE.md(가드 graphify 우선+Worktree Rules), .gitignore(graphify-out/, .graphify/), main 그래프 빌드(.graphify/graph.json 23노드/28엣지, 어시스턴트 시맨틱 추출 — Kotlin AST 문법 미지원으로 --semantic 경로 사용), graphify-out→.graphify 심링크(코어 게이트가 레거시 경로 검사하는 불일치 브리지). 커밋 b690f49
