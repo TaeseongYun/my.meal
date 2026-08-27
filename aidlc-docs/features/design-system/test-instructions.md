@@ -29,3 +29,11 @@
 
 - 위 테스트 전건 green + `:androidApp:assembleDebug` + `:shared:compileKotlinIosSimulatorArm64` 성공
 - 실기기/시뮬레이터 육안 확인 1회: App 데모 텍스트가 이서윤체로 렌더링되는지 (⚠️ UNCERTAIN 해소 절차)
+
+## Runtime Verification (ROLE 2 기록, 2026-08-27)
+
+- 실행 명령: `./gradlew :core:designsystem:testAndroidHostTest` / `:core:designsystem:iosSimulatorArm64Test`
+- 결과: SikdorokTokensTest 6 tests, 0 failures (Android host) / iOS 시뮬레이터 테스트 BUILD SUCCESSFUL
+- 빌드 검증: `:androidApp:assembleDebug` + `:shared:compileKotlinIosSimulatorArm64` 성공 (SikdorokTheme 래핑 상태)
+- Environment Constraints: 에뮬레이터/시뮬레이터 GUI 육안 확인(이서윤체 렌더링 — UNCERTAIN 항목)은 이 환경에서 미수행. 사용자가 앱 실행으로 확인 필요
+- 태스크명 정정: build-instructions.md의 `:core:designsystem:assembleDebug`는 신규 AGP KMP 플러그인에 없음 → `:core:designsystem:assemble` 사용 (문서 갱신 대상)

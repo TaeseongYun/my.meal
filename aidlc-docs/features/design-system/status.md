@@ -1,7 +1,7 @@
 # Status — design-system
 
 - Feature: design-system
-- Status: **approved** (전 게이트 통과 — 구현 대기)
+- Status: **implemented** (2026-08-27, 워크트리 design-system 브랜치)
 - Request Type: prepared-requirement (피그마 스타일 가이드 = 준비된 입력물)
 - Depth Level: standard
 - Project State: brownfield (KMP 템플릿 — 데모 코드만 존재)
@@ -47,3 +47,5 @@ GATE-2.5(사용자 스토리): 미트리거 — 보너스 영역 7 제외. READY
 - [x] STEP 8 (판정: READY — 구현 진행 가능)
 - [x] STEP 9 (build-instructions.md, test-instructions.md)
 - [x] GATE-5 승인 (2026-08-27, "B 처리하되 워크트리로 진행") → 구현은 전용 워크트리에서 /ctx-run
+- [x] 구현 완료 (/ctx-run ROLE 0~6): UOW-1~4 전건, 테스트 6/6 green (Android host + iOS sim), 빌드 통과
+- [ ] 잔여: 실기기/에뮬레이터 육안 확인 (이서윤체 렌더링 — UNCERTAIN), main 병합
