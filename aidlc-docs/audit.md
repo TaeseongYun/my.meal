@@ -281,3 +281,18 @@ Representative case: `ctx-aidlc-run` STEP 1-A detects multi-feature → guides r
 - Previous: approved
 - Current: implemented
 - Trigger: 구현/검증 완료, 커밋 플랜 확정
+
+## [STEP] Worktree Allocation — completed
+- Timestamp: 2026-08-27T16:55:00+09:00
+- Feature: design-system
+- Step: ctx-worktree
+- Action: completed
+- Reason: git init + 베이스라인 커밋(6807150) 후 워크트리 생성. 경로는 사용자 선택(mymeal-worktrees 밑)
+- Outputs: /Users/yoontaeseong/study/mymeal-worktrees/design-system (branch: design-system)
+
+## [STATUS] status change
+- Timestamp: 2026-08-27T17:40:00+09:00
+- Feature: design-system
+- Previous: implemented
+- Current: merged
+- Trigger: 리모트 origin(github.com/TaeseongYun/my.meal) 설정, main+design-system 푸시, PR #1 생성("pr 생성해주세요 그리고 머지되면 워크트리도 제거되게 처리해주세요."), 사용자 머지(스쿼시, c450ced). 머지 감시 모니터가 감지 → 워크트리/로컬 브랜치 제거, main 최신화 완료
