@@ -304,3 +304,11 @@ Representative case: `ctx-aidlc-run` STEP 1-A detects multi-feature → guides r
 - Action: completed
 - Reason: 활성 코어가 ~/work/aidlc-workflow 로 이동 + graphify가 기본 그래프 기반으로 변경(워크트리별 그래프 격리, 머지 후 main 그래프 재생성 규칙). 사용자 입력: "work/aidlc-workflow 부분에 워크트리에 대한 내용이 바뀌었습니다. 내용을 보고 여기 싱크를 맞춰주세요."
 - Outputs: CLAUDE.md(가드 graphify 우선+Worktree Rules), .gitignore(graphify-out/, .graphify/), main 그래프 빌드(.graphify/graph.json 23노드/28엣지, 어시스턴트 시맨틱 추출 — Kotlin AST 문법 미지원으로 --semantic 경로 사용), graphify-out→.graphify 심링크(코어 게이트가 레거시 경로 검사하는 불일치 브리지). 커밋 b690f49
+
+## [STEP] Project Profile Injection — completed
+- Timestamp: 2026-08-27T18:30:00+09:00
+- Feature: (project-level)
+- Step: profile-injection (실행 프롬프트 §2)
+- Action: completed
+- Reason: 사용자가 "도시락 일기 KMP 프로젝트 — Claude/AIDLC 실행 프롬프트" 문서 제공. §1 환경 진단은 기충족(코어 ~/work/aidlc-workflow, graphify 게이트 0). §2 프로필을 CTX source of truth로 반영. 프로덕션 코드 미생성, §3 로드맵 진행 전 정지
+- Outputs: ctx/project-profile.ctx.md(전면 갱신 — 승인 스택/아키텍처 원칙/Gradle 원칙/Forbidden), ctx/INDEX.md(제품명, ADR 승인 제약 2건 추가)
