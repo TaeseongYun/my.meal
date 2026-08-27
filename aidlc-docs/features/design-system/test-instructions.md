@@ -40,6 +40,6 @@
 
 ## 육안 확인 결과 (2026-08-27, 쇼케이스)
 
-- 구성: `StyleGuideScreen`(:core:designsystem) — 매니페스트 "Style Guide 화면 구성" 그대로 (아이콘 제외). App 루트가 쇼케이스를 표시 (F-1에서 교체 예정)
+- 구성: `StyleGuideScreen`(:core:designsystem) — 매니페스트 "Style Guide 화면 구성" 그대로 (아이콘 제외). **별도 카탈로그 앱 `:catalogApp`(com.devts.mymeal.catalog, "Sikdorok DS")이 표시** — 메인 앱과 독립 설치. 실행: `./gradlew :catalogApp:assembleDebug` 또는 IDE run configuration `catalogApp`
 - 실행: Android 에뮬레이터 Medium_Phone, `adb install` 후 스크린캡처 3장
 - 결과: Font/Text Style/Color(Bg·Txt·Alert·Accent)/Spacing 전 섹션 정상. 이서윤체 국·영문 적용, lineHeight 잘림 없음 → Quality Gate의 육안 확인 항목 종결

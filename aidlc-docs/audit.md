@@ -336,3 +336,11 @@ Representative case: `ctx-aidlc-run` STEP 1-A detects multi-feature → guides r
 - Action: completed
 - Reason: 중단 조건 미해당(링크·토큰 보유). 노드 721:11215 캔버스 확인 결과 디자인 시스템 영역 = 기추출한 836:33127 Style Guide 프레임과 동일 — 매니페스트에 화면 구성 실측 추가 후 그대로 구현. 에뮬레이터 육안 확인으로 UNCERTAIN(lineHeight) 해소
 - Outputs: core/designsystem StyleGuideScreen.kt, shared App.kt(쇼케이스 연결), design-manifest.md(화면 구성), status.md, test-instructions.md. 코드 그래프 재생성은 다음 시맨틱 패스로 이연(Kotlin AST 미지원)
+
+## [STEP] Design System Catalog App — completed
+- Timestamp: 2026-08-27T23:45:00+09:00
+- Feature: design-system
+- Step: catalog-app (사용자 정정: "아예 컨피그레이션을 따로 만들어서 앱자체가 따로 생성되는것을 보고 싶었습니다.")
+- Action: completed
+- Reason: 쇼케이스를 메인 앱 진입에 연결했던 방식 철회 — shared App.kt 원복. 별도 애플리케이션 모듈 :catalogApp(applicationId com.devts.mymeal.catalog, 라벨 "Sikdorok DS") 신설, :core:designsystem만 의존. 에뮬레이터에 메인 앱과 카탈로그 앱 2개 패키지 병존 설치 확인, 카탈로그 앱 단독 실행·렌더링 확인
+- Outputs: catalogApp/{build.gradle.kts,src/main/AndroidManifest.xml,src/main/kotlin/.../CatalogActivity.kt}, settings.gradle.kts(include), shared App.kt(원복). iOS 카탈로그 앱은 미포함(필요 시 별도)
