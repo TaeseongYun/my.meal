@@ -328,3 +328,11 @@ Representative case: `ctx-aidlc-run` STEP 1-A detects multi-feature → guides r
 - Decision: approved
 - User Input: "검토 완료. 단 피쳐 별 핸드오프 명령은 이후에 진행.\n\n변경된 파일 브랜치 만들필요 없다면 현재 메인 브랜치에서 에맨드 커밋 진행."
 - Notes: 사용자가 _roadmap.md 제목 직접 수정(1줄). 피처별 핸드오프는 보류 — 사용자 요청 시 개시. 로드맵 커밋에 amend 반영
+
+## [STEP] Style Guide Showcase — completed
+- Timestamp: 2026-08-27T23:35:00+09:00
+- Feature: design-system
+- Step: showcase (사용자 지시: "디자인 시스템을 확인할 수 있는 앱 컨피규레이션을 만들어주시고... 피그마 링크 상 디자인 시스템이라고 되어있는 영역을 메니페스트로 뽑아서 그대로 작업")
+- Action: completed
+- Reason: 중단 조건 미해당(링크·토큰 보유). 노드 721:11215 캔버스 확인 결과 디자인 시스템 영역 = 기추출한 836:33127 Style Guide 프레임과 동일 — 매니페스트에 화면 구성 실측 추가 후 그대로 구현. 에뮬레이터 육안 확인으로 UNCERTAIN(lineHeight) 해소
+- Outputs: core/designsystem StyleGuideScreen.kt, shared App.kt(쇼케이스 연결), design-manifest.md(화면 구성), status.md, test-instructions.md. 코드 그래프 재생성은 다음 시맨틱 패스로 이연(Kotlin AST 미지원)

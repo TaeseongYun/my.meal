@@ -24,7 +24,7 @@ GATE-2.5(사용자 스토리): 미트리거 — 보너스 영역 7 제외. READY
 
 ## Uncertain Areas
 
-- ⚠️ 이서윤체 실측 lineHeight(대부분 1.0 배율)의 실기기 렌더링 일치 여부 — 구현 후 확인 필요
+- ~~이서윤체 lineHeight 렌더링~~ 해소 (2026-08-27): StyleGuideScreen 쇼케이스를 Android 에뮬레이터(Medium_Phone)에서 실행 — 전 타이포 단계 잘림/겹침 없음, 국·영문 이서윤체 통일 확인. iOS/실기기 확인은 선택 사항
 - ⚠️ 이서윤체 배포 라이선스 — 사용자가 파일 제공 시 함께 확인 (Q1=A)
 
 ## Open Dependencies
@@ -48,4 +48,4 @@ GATE-2.5(사용자 스토리): 미트리거 — 보너스 영역 7 제외. READY
 - [x] STEP 9 (build-instructions.md, test-instructions.md)
 - [x] GATE-5 승인 (2026-08-27, "B 처리하되 워크트리로 진행") → 구현은 전용 워크트리에서 /ctx-run
 - [x] 구현 완료 (/ctx-run ROLE 0~6): UOW-1~4 전건, 테스트 6/6 green (Android host + iOS sim), 빌드 통과
-- [ ] 잔여: 실기기/에뮬레이터 육안 확인 (이서윤체 렌더링 — UNCERTAIN), main 병합
+- [x] 육안 확인 완료 (에뮬레이터, StyleGuideScreen 쇼케이스) / main 병합 완료

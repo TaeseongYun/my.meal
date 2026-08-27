@@ -37,3 +37,9 @@
 - 빌드 검증: `:androidApp:assembleDebug` + `:shared:compileKotlinIosSimulatorArm64` 성공 (SikdorokTheme 래핑 상태)
 - Environment Constraints: 에뮬레이터/시뮬레이터 GUI 육안 확인(이서윤체 렌더링 — UNCERTAIN 항목)은 이 환경에서 미수행. 사용자가 앱 실행으로 확인 필요
 - 태스크명 정정: build-instructions.md의 `:core:designsystem:assembleDebug`는 신규 AGP KMP 플러그인에 없음 → `:core:designsystem:assemble` 사용 (문서 갱신 대상)
+
+## 육안 확인 결과 (2026-08-27, 쇼케이스)
+
+- 구성: `StyleGuideScreen`(:core:designsystem) — 매니페스트 "Style Guide 화면 구성" 그대로 (아이콘 제외). App 루트가 쇼케이스를 표시 (F-1에서 교체 예정)
+- 실행: Android 에뮬레이터 Medium_Phone, `adb install` 후 스크린캡처 3장
+- 결과: Font/Text Style/Color(Bg·Txt·Alert·Accent)/Spacing 전 섹션 정상. 이서윤체 국·영문 적용, lineHeight 잘림 없음 → Quality Gate의 육안 확인 항목 종결

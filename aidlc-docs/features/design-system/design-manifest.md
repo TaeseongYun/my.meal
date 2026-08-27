@@ -62,3 +62,16 @@ Source of truth snapshot. Extracted via Figma REST API on 2026-08-27.
 
 - `ic/` 네임드: share, list, arrow/left, arrow/right, settings, loading, check, more, download
 - 외부 라이브러리 참조명: heroicons-solid:camera, tabler:pencil-plus, ci:edit-pencil-line-01/02, ic:round-arrow-left, eva:arrow-up-fill, octicon:plus-16, ci:hamburger-md, lucide:x, ph:camera-fill, uis:exclamation-circle, ri:pencil-fill, majesticons:mail, fluent:info-24-filled
+
+## Style Guide 화면 구성 (node 836:33127 실측 — 확인용 쇼케이스 화면의 근거)
+
+프레임 900x2800, 상→하 섹션: Title → Font → Text Style → Color → Icon → Spacing
+
+- **Title**: "Style Guide" (대제목) + "Sikdorok" 라벨
+- **Font**: 회색 박스(#F9F9F9) 안에 샘플 "매일 먹는 도시락, 식도록과 함께 간편하게 기록하세요!" + 캡션 "이서윤체 국, 영문 통일"
+- **Text Style** 샘플 텍스트 (전부 이서윤체):
+  - H1/24: "식도록과 함께하는" / H2/20: "6월의 도시락" / H3/18: "오늘의 도시락" / H4/16: "저녁"
+  - Body1/14: "오늘의 메뉴" / Body2/13: "메모를 남겨보세요" / Detail/12: "오후 12:53"
+- **Color**: 컬러칩 카드(50x50 스와치 + 역할명 + 팔레트명 + hex), 그룹 라벨 Bg / Txt·Btn / Alert
+- **Icon**: 24종 — 쇼케이스에서 제외 (Q2=B, 디자인 미확정)
+- **Spacing**: 높이 4/8/12/16/20/24/32/40 가로 바(#444444) + 수치 라벨
