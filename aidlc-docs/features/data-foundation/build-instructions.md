@@ -7,7 +7,7 @@ UOW-1(:core:model) → UOW-2(:core:data+Room) → UOW-3(스키마·DAO·repo) �
 ```bash
 ./gradlew :core:model:assemble :core:model:compileKotlinIosSimulatorArm64      # UOW-1
 ./gradlew :core:data:assemble  :core:data:compileKotlinIosSimulatorArm64       # UOW-2~4
-./gradlew :core:data:testAndroidHostTest :core:data:iosSimulatorArm64Test      # 테스트
+./gradlew :core:data:jvmTest :core:data:iosSimulatorArm64Test                  # 테스트 (DB·파일: jvm+iOS. android 런타임은 앱 빌드로 검증)
 ./gradlew :androidApp:assembleDebug                                            # 전체 회귀
 ```
 

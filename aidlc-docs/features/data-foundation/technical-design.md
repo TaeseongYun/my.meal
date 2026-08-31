@@ -91,4 +91,4 @@ upsert: ViewModel(F-3) → MealRepository → DAO(트랜잭션: entry+items 교�
 | 4 | 단위 | 저장→경로 기록→삭제 연계, 고아 정리 |
 
 ## 9. Open Items
-- ⚠️ UNCERTAIN: Room KMP gradle/KSP 타깃 구성 세부 — UOW-2에서 공식 문서 검증 후 확정 (그 외 없음)
+- ~~Room KMP 구성 세부~~ 해소 (2026-08-31 구현): room 2.8.4 + sqlite-bundled 2.7.0 + ksp 2.3.11 + `androidx.room` gradle plugin — 전 버전 공식 저장소(dl.google.com/maven.org) 실존 확인. 구현 파생 2건: ① 테스트 실행용 jvm() 타깃 추가(:core:model/:core:data) — Room android 아티팩트의 instrumented Context 제약 회피 ② 수동 소스셋(storageTest) 도입에 따른 applyDefaultHierarchyTemplate() 명시 (CTX 규칙화)
