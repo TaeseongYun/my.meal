@@ -403,3 +403,26 @@ Representative case: `ctx-aidlc-run` STEP 1-A detects multi-feature → guides r
 - Action: completed
 - Reason: M 3건. Self-Verification: 근거=GATE-2 답변+source-plan+ADR-0001. 대안(SQLDelight) 기각 근거 기재. UNCERTAIN 1건(Room KMP 구성 세부 — 구현 시 검증) 게이트에 노출
 - Outputs: technical-design.md
+
+## [STEP] Home Screen (UI-first) — completed
+- Timestamp: 2026-08-31T22:25:00+09:00
+- Feature: home (roadmap 외 — F-5 diary/F-3 record 선행 UI. 사용자 직접 지시)
+- Step: ui-implementation
+- Action: completed
+- Reason: 사용자 입력 "주별 캘린더 + 아침-점심-저녁 캐러셀(등록=사진·글귀/미등록=빈화면·빈 글귀) + 작성 FAB 화면 구성" — Figma 832:92613 JSON 추출 + 브라우저 뷰어 렌더 판독(REST images API 429 지속 → 우회. 문안 "N월의 도시락"/"N월 몇째주"/"오늘의 도시락 🍱" 확정, 사진 원본은 이미지필 API 다운로드). :feature:home 모듈(ADR-0001), kotlinx-datetime 0.7.1 신규 선언(로컬 캐시·프로젝트 klib로 버전 검증). 아이콘은 Canvas 근사(크롭 확보 시 교체 후보). 토큰 외 값·스텁 결정은 features/home/design-manifest.md 표 참조
+- Outputs: feature/home/{build.gradle.kts, HomeUiState.kt, HomeScreen.kt, HomeUiStateTest.kt(7), sample_meal_photo.png}, settings.gradle.kts, gradle/libs.versions.toml, shared/{build.gradle.kts, App.kt(로그인→홈 임시 전환)}, features/home/{design-manifest,dependency-check,status}.md. 검증: 5개 명령 exit 0, 테스트 7/7×2플랫폼, 에뮬레이터 스크린샷 3종(홈·점심 빈 상태·스와이프) Figma 렌더 대조
+
+## [ANSWER] 홈 화면 사전 체크 4건 (계획 모드 질의)
+- Timestamp: 2026-08-31T22:25:00+09:00
+- Feature: home
+- Question: ① 피처 슬러그/워크플로 위치 ② 빈 화면 PNG 처리 ③ 앱 진입 연결 ④ 주별 캘린더 날짜 산출
+- User Input: ① "standalone home" ② "자리표시자로 먼저 구현" ③ "로그인 버튼 → 홈 전환" ④ "실제 오늘 기준 주 계산"
+- Impact: :feature:home 신설(로드맵 외 슬라이스), 빈 상태 자리표시자(#F2F2F2)+TODO, App.kt remember 임시 전환(F-1 교체 예정), kotlinx-datetime 0.7.1 추가·weekOf() 순수 함수. [확신: 확실]
+
+## [LOOP] home — round 1 COMPLETE
+- Timestamp: 2026-08-31T22:25:00+09:00
+- Feature: home
+- Step: ctx-score-loop round 1
+- Action: completed
+- Reason: Dependency 25/25 · Build 25/25 · Test 25/25 · AC 23/25 = 98/100 > 85 & 빌드 축 ≠ 0 (GR-1/GR-2 통과). 증빙: 5개 명령 exit 0(score-round1.log), --rerun-tasks 테스트 7/7×2, AC 4/4 스크린샷. 감점 −2: 아침/점심 이모지 추정·주차 라벨 규칙(디자이너 확인 항목). 루프 종료
+- Outputs: features/home/dependency-check.md(Score History round 1), features/home/status.md(점수 미러)
