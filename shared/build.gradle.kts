@@ -47,6 +47,7 @@ kotlin {
         commonMain.dependencies {
             implementation(project(":core:designsystem"))
             implementation(project(":feature:login"))
+            implementation(project(":feature:home"))
             implementation(libs.compose.runtime)
             implementation(libs.compose.foundation)
             implementation(libs.compose.material3)
