@@ -30,4 +30,6 @@
 - [x] STEP 1/1-B/1-C/2/3/4/5
 - [x] GATE-2 통과 (2026-08-31, 답변 B/B/A)
 - [x] STEP 6 (UOW 4개: S/M/M/M)
-- [ ] GATE-3 ← **대기 중**
+- [x] GATE-3 승인 (2026-08-31, AskUserQuestion "승인")
+- [x] STEP 6.5 (technical-design.md — ADR 3건)
+- [ ] GATE-3.5 ← **대기 중**

@@ -7,12 +7,12 @@ shared(조립 루트)에 내비게이션·DI·상태관리·로깅의 단일 골
 근거: `_source-plan.md` §기술 방향·§구조 설계 원칙, `_roadmap.md` F-1, ADR-0001.
 
 ## In-Scope
-- **내비게이션 골격**: 그래프/라우트 규약 + 첫 destination = login (Q1에서 라이브러리 확정)
+- **내비게이션 골격**: JetBrains Navigation Compose (Q1=A 확정) — 그래프/라우트 규약 + 첫 destination = login
 - **Koin DI 부트스트랩**: shared 루트 모듈 + 피처별 module 기여 규약 (Android/iOS 초기화 지점 포함)
 - **ViewModel KMP + StateFlow UDF 골격**: 규약 확립 (UiState/Action, 일회성 이벤트는 Channel/SharedFlow) — 첫 적용은 LoginViewModel 골격
 - **Kermit 구조화 로깅** 초기화 (개인정보 로깅 금지 규칙 준수)
 - **버전 카탈로그**: navigation/koin/kermit 신규 항목 (버전은 구현 시점 공식 문서 검증)
-- **iOS 최소 버전 확정 반영** (Q2 — 현재 템플릿 18.2)
+- **iOS 최소 버전 17.0 반영** (Q2 확정 — 현재 18.2에서 하향, pbxproj 수정)
 
 ## Out-of-Scope
 - 로그인 실제 동작(F-6), 화면 추가(F-3/F-5/F-7), :core:ui 등 빈 모듈 생성(내용 발생 시), 데이터 계층(F-2), 딥링크(후속 — kmp-navigation-platform 규칙으로 그때 검증)
@@ -30,7 +30,7 @@ shared(조립 루트)에 내비게이션·DI·상태관리·로깅의 단일 골
 - DR-2: `:feature:login`이 내비 골격에 destination 등록 방식으로 재연결 (App.kt 직접 호출 제거)
 
 ## Requirement Gaps
-Q1(내비 라이브러리), Q2(iOS 최소 버전 — BLOCK), P2 자동결정 4건 — questions 파일 참조.
+~~Q1·Q2~~ 답변 완료 (2026-08-31): 내비=Navigation Compose, iOS 최소=17.0. P2 자동결정 4건은 questions 파일.
 
 ## Initial Risk Assessment
 | 리스크 | 수준 | 대응 |

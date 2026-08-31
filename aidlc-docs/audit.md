@@ -389,3 +389,17 @@ Representative case: `ctx-aidlc-run` STEP 1-A detects multi-feature → guides r
 - Previous: questions-open
 - Current: questions-open (변동 없음)
 - Trigger: F-1 Q1·Q2 미답변 — Q2(iOS 최소 버전)는 BLOCK이라 게이트 통과 불가, 재제시
+
+## [ANSWER]+[GATE-2] app-foundation / [GATE-3] data-foundation
+- Timestamp: 2026-08-31T22:20:00+09:00
+- Feature: app-foundation, data-foundation
+- User Input: AskUserQuestion 답변 — "[F-1 Q2/BLOCK] 최소 지원 iOS 버전?"="17.0", "[F-1 Q1] 내비게이션 라이브러리?"="Navigation Compose (Recommended)", "[F-2 GATE-3] UOW 승인?"="승인"
+- Impact: F-1 BLOCK 해소·GATE-2 approved(Readiness 71→90 READY), STEP 6 완료(UOW M×4). F-2 GATE-3 approved → STEP 6.5 완료(technical-design, ADR-2에 UNCERTAIN 1건 유지). [확신: 확실]
+
+## [STEP-6.5] data-foundation Technical Design — completed
+- Timestamp: 2026-08-31T22:22:00+09:00
+- Feature: data-foundation
+- Step: STEP-6.5
+- Action: completed
+- Reason: M 3건. Self-Verification: 근거=GATE-2 답변+source-plan+ADR-0001. 대안(SQLDelight) 기각 근거 기재. UNCERTAIN 1건(Room KMP 구성 세부 — 구현 시 검증) 게이트에 노출
+- Outputs: technical-design.md

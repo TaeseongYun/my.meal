@@ -5,10 +5,10 @@
 ## Summary
 | # | Priority | Type | 질문 | If unanswered | 상태 |
 |---|----------|------|------|---------------|------|
-| Q1 | P1-IMPORTANT | domain | 내비게이션 라이브러리 선택 (열어둔 결정 #7) | AI-RECOMMEND-A | 미답변 |
-| Q2 | P1-IMPORTANT | policy | 최소 지원 iOS 버전 (열어둔 결정 #9, 현재 18.2) | BLOCK | 미답변 |
+| Q1 | P1-IMPORTANT | domain | 내비게이션 라이브러리 선택 (열어둔 결정 #7) | AI-RECOMMEND-A | 답변됨: A |
+| Q2 | P1-IMPORTANT | policy | 최소 지원 iOS 버전 (열어둔 결정 #9, 현재 18.2) | BLOCK | 답변됨: 17.0 |
 
-BLOCK 1건. 질문 예산: comprehensive 12 중 2 사용.
+BLOCK 0건 (Q2 답변으로 해소). 질문 예산: comprehensive 12 중 2 사용.
 
 ### Q1. 내비게이션 라이브러리는 무엇으로 할까요?
 - Priority: P1-IMPORTANT
@@ -23,8 +23,8 @@ BLOCK 1건. 질문 예산: comprehensive 12 중 2 사용.
   - C) Decompose → 구성 컴포넌트 강력하나 학습 비용 높음 (1인 개발 기준 불리)
 - AI Recommendation: A — Rationale: 개발자의 기존 Compose/androidx 경험 재사용(profile 학습비용 기준), lifecycle-viewmodel과 동일 계열, CMP 공식 문서 커버. 버전은 구현 시점 검증
 - If unanswered: AI-RECOMMEND-A
-- [Answer]:
-- [Confidence]:
+- [Answer]: A (Navigation Compose)
+- [Confidence]: 확실
 
 ### Q2. 최소 지원 iOS 버전을 확정해 주세요 (현재 템플릿 기본 18.2)
 - Priority: P1-IMPORTANT
@@ -39,8 +39,8 @@ BLOCK 1건. 질문 예산: comprehensive 12 중 2 사용.
   - C) 16.0 → 더 넓은 도달, 구형 기기 검증 부담
   - D) 직접 입력
 - If unanswered: BLOCK (Android는 기존 minSdk 24 유지 — 기설정 사실)
-- [Answer]:
-- [Confidence]:
+- [Answer]: B (17.0)
+- [Confidence]: 확실
 
 ## AI 자동 결정 (P2)
 | # | 항목 | 기본값 | 근거 | 변경 영향 |
