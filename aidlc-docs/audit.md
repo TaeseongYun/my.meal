@@ -409,3 +409,10 @@ Representative case: `ctx-aidlc-run` STEP 1-A detects multi-feature → guides r
 - Feature: data-foundation, app-foundation
 - User Input: "[F-1 GATE-3]"="왜 hilt 를 안쓰고 koin 을 쓰는지만 알려주세요.", "[F-2 GATE-3.5]"="승인"
 - Notes: F-2 GATE-3.5 approved → STEP 7~9 완료(build/test instructions, Readiness 90 READY), GATE-5 대기. F-1 GATE-3은 Hilt/Koin 설명 요청으로 보류 — 답변 후 재제시. 참고: Koin은 사용자 제공 프로필 §2의 승인 스택("DI는 Koin 한 종류만")이며 Hilt는 Android 전용이라 KMP commonMain/iOS에서 사용 불가
+
+## [GATE-3] app-foundation / [GATE-5] data-foundation
+- Timestamp: 2026-08-31T23:00:00+09:00
+- Feature: app-foundation, data-foundation
+- Decision: approved / approved
+- User Input: "둘 다 승인"
+- Notes: F-1 STEP 6.5 완료(ADR: Nav Compose+type-safe 라우트/Koin 부트스트랩+구성검증 테스트/iOS 17.0) → GATE-3.5 대기. F-2 전 게이트 통과 → 워크트리 구현 개시

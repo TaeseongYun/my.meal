@@ -1,7 +1,7 @@
 # Status — data-foundation (F-2)
 
 - Feature: data-foundation
-- Status: **in-design** (GATE-2 통과)
+- Status: **approved** (전 게이트 통과 — 구현 개시)
 - Request Type: prepared-requirement (_source-plan.md §데이터 및 백엔드 방향 발췌)
 - Depth Level: comprehensive
 - Project State: brownfield
@@ -35,4 +35,4 @@
 - [x] GATE-3.5 승인 (2026-08-31)
 - [-] STEP 6.7/GATE-4 스킵 (인프라 없음)
 - [x] STEP 7~9 (Readiness 90 유지 READY / build·test instructions)
-- [ ] GATE-5 ← **대기 중** (통과 시 워크트리 /ctx-run)
+- [x] GATE-5 승인 (2026-08-31, "둘 다 승인") → 워크트리 data-foundation에서 /ctx-run
