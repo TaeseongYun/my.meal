@@ -1,4 +1,4 @@
-package com.devts.mymeal.features.login.presentation
+package com.devts.mymeal.feature.login
 
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
@@ -27,10 +27,10 @@ import com.devts.mymeal.core.designsystem.SikdorokTheme
 import org.jetbrains.compose.resources.DrawableResource
 import org.jetbrains.compose.resources.painterResource
 
-import mymeal.shared.generated.resources.Res
-import mymeal.shared.generated.resources.ic_kakao
-import mymeal.shared.generated.resources.ic_mail_white
-import mymeal.shared.generated.resources.login_hero
+import com.devts.mymeal.feature.login.generated.resources.Res
+import com.devts.mymeal.feature.login.generated.resources.ic_kakao
+import com.devts.mymeal.feature.login.generated.resources.ic_mail_white
+import com.devts.mymeal.feature.login.generated.resources.login_hero
 
 // 디자인 근거: Figma 832:48657 (로그인 화면). 소셜 브랜드/전용 서피스 색은 토큰 외 —
 // 디자이너 확인 항목으로 audit에 기록됨.
