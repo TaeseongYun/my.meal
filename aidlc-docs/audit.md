@@ -344,3 +344,18 @@ Representative case: `ctx-aidlc-run` STEP 1-A detects multi-feature → guides r
 - Action: completed
 - Reason: 쇼케이스를 메인 앱 진입에 연결했던 방식 철회 — shared App.kt 원복. 별도 애플리케이션 모듈 :catalogApp(applicationId com.devts.mymeal.catalog, 라벨 "Sikdorok DS") 신설, :core:designsystem만 의존. 에뮬레이터에 메인 앱과 카탈로그 앱 2개 패키지 병존 설치 확인, 카탈로그 앱 단독 실행·렌더링 확인
 - Outputs: catalogApp/{build.gradle.kts,src/main/AndroidManifest.xml,src/main/kotlin/.../CatalogActivity.kt}, settings.gradle.kts(include), shared App.kt(원복). iOS 카탈로그 앱은 미포함(필요 시 별도)
+
+## [STEP] Login Screen (UI-first) — completed
+- Timestamp: 2026-08-31T20:40:00+09:00
+- Feature: login (roadmap 외 — F-6 account-sync 선행 UI. 사용자 직접 지시)
+- Step: ui-implementation
+- Action: completed
+- Reason: 사용자 입력 "로그인 화면으로 이제 만들 예정이고... 이부분을 화면으로 먼저 만들어주세요... 워크트리로 작업" — 중단 조건(링크/토큰 부재) 미해당. Figma 832:48657 추출·렌더 대조, 일러스트/아이콘은 렌더 크롭 번들. 로그인 수단(카카오+이메일)은 디자인이 시사 — 정책 확정은 F-6 분석에서. 토큰 외 색상 처리 내역은 features/login/design-manifest.md 표 참조
+- Outputs: shared features/login/LoginScreen.kt, composeResources 에셋 3종, App.kt(첫 화면=로그인), features/login/design-manifest.md. 검증: Android 빌드+에뮬레이터 스크린샷 대조, iOS 컴파일 통과. 종료된 design-system-catalog 워크트리/브랜치 정리 완료(내용은 main에 기반영)
+
+## [ANSWER] 모듈 구조 결정 (로드맵 Open Item #1 + 구조 원칙 개정)
+- Timestamp: 2026-08-31T21:10:00+09:00
+- Feature: login / (project-level)
+- Question: 로그인 화면 모듈 배치 → 프로젝트 모듈 구조
+- User Input: "디자인 시스템은 충족하지만 이제 드로이드 카이기 식으로 모듈 분리를 원합니다."
+- Impact: ADR-0001 작성·수락. project-profile Gradle 구조 원칙 개정. :feature:login 신설(로그인 화면·리소스 이동, shared는 조립만). 빌드 전체 통과. [확신: 확실]

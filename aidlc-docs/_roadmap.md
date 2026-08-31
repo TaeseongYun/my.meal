@@ -136,7 +136,7 @@ graph TD
 
 ## 7. Open Items
 
-- [ ] #1 `:core:designsystem` Gradle 모듈 유지 vs shared 내 패키지 통합 — F-1 technical-design ADR에서 결정 (기존 사용자 승인 자산이므로 기본값: 유지)
+- [x] #1 해소 (2026-08-31, ADR-0001): DroidKaigi식 모듈 구조 채택 — :core:designsystem 유지 확정, 피처는 착수 시 :feature:<slug> 모듈로 생성 (첫 적용 :feature:login)
 - [ ] #2 열어둔 결정 10건 — 각 담당 피처의 STEP 4 질문으로 이관 (F-1: Nav 버전·최소 OS / F-4: confidence·AI 범위·영양 데이터 방식 / F-6: 로그인·백업·충돌·SDK / F-7: Analytics 동의)
 - [ ] #3 Figma 화면 노드(721-11215) 분석 — F-1(화면 골격 파악)과 각 화면 피처에서 kmp-figma-to-code 규칙으로 수행. 접근 불가 시 Export 요청
 

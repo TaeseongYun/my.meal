@@ -40,13 +40,13 @@
 - 공통화는 실제로 2개 이상의 Feature에서 필요할 때만 core로 승격하라
 - UseCase/Repository/domain/data 폴더는 실제 책임이 생겼을 때만 만들라 — 위임만 하는 계층과 빈 폴더 금지
 
-## 초기 Gradle 구조 원칙
+## Gradle 구조 원칙 (ADR-0001로 개정, 2026-08-31)
 
-- 첫 구현은 shared KMP 모듈 + androidApp + iosApp을 기본 후보로 하라
-- shared/commonMain 내부는 feature-first 패키지: core, data, features/record, features/diary, features/settings
-- 실제 분리 신호(AI 모델 바이너리, 독립 빌드·테스트 경계, 두 번째 앱/소비자)가 생기기 전에는 core/feature별 Gradle 멀티모듈을 만들지 마라
-- **기확정 예외**: `:core:designsystem` Gradle 모듈은 사용자 승인(2026-08-27 GATE-2.7)으로 이미 존재한다. 로드맵에서 shared 내부 패키지로의 통합 여부를 재확인하라
-- 기술 설계에 향후 멀티모듈 전환 조건과 목표 의존성 그래프를 별도로 기록하라
+- **DroidKaigi식 모듈 구조**: `:core:<name>`(공유 기반) / `:feature:<slug>`(화면 피처) / `shared`(조립 루트 + iOS framework) / 얇은 호스트 앱(androidApp·iosApp·catalogApp)
+- 각 피처는 **착수 시점**에 `:feature:<slug>` 모듈로 생성하라 — 빈 모듈 선행 스캐폴딩 금지
+- feature 모듈 간 직접 의존 금지 — 교차 재사용은 `:core:*`로 승격하라
+- data 계층 모듈(:core:data 등)은 실제 책임이 생길 때 분리를 판단하라 (F-2 기술 설계)
+- 상세 근거: aidlc-docs/adr/0001-droidkaigi-module-structure.md
 
 ## 참고 프로젝트
 
