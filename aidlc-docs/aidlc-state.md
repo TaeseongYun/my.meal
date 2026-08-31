@@ -11,7 +11,7 @@ Update rules:
 ## Project Information
 - Project Type: brownfield (KMP 템플릿, 도메인 코드 없음)
 - Start Date: 2026-08-27
-- Current Stage: Phase 1 — F-1/F-2 GATE-2 대기
+- Current Stage: Phase 1 — F-2 GATE-3 대기, F-1 GATE-2 BLOCK 대기
 - Current Feature: design-system
 
 ## Workspace State
@@ -31,7 +31,7 @@ Update rules:
 |------|--------|----------------|-------|
 | design-system | completed | F-0 (소급 편입) | yts0646 |
 | app-foundation | questions-open | F-1 | yts0646 |
-| data-foundation | questions-open | F-2 | yts0646 |
+| data-foundation | in-design | F-2 | yts0646 |
 | record | ready | F-3 | yts0646 |
 | food-analysis | ready | F-4 | yts0646 |
 | diary | ready | F-5 | yts0646 |
@@ -58,7 +58,7 @@ If the table is empty, write "Not applicable".
 ## Current Feature Summary
 - Feature Slug: app-foundation + data-foundation (Phase 1 병행 분석)
 - Request Type: prepared-requirement / Depth: comprehensive
-- Feature Status: questions-open ×2 (F-1 BLOCK 1건: iOS 최소 버전)
+- Feature Status: F-2 in-design(GATE-3 대기) / F-1 questions-open(BLOCK 1: iOS 최소 버전 미답)
 - Last Updated: 2026-08-31
 
 ## (이전 완료 피처 요약 — design-system)

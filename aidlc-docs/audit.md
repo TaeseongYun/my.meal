@@ -367,3 +367,25 @@ Representative case: `ctx-aidlc-run` STEP 1-A detects multi-feature → guides r
 - Action: completed
 - Reason: 사용자 입력 "Phase 1 착수해주세요." 분류 prepared-requirement, depth comprehensive(사용자 템플릿). 검증 사실: iOS 배포 타깃 18.2(템플릿), 카탈로그에 nav/koin/kermit/room 부재. F-1 질문 2(policy BLOCK 1: iOS 최소 버전 — 열어둔 결정 #9), F-2 질문 3(전건 domain AI-REC). P2 자동결정 각 4건. overconfidence 재검출: 외부 연동 없음(로컬), 기존 시스템 영향 = :feature:login 재연결 FR-2/DR-2로 커버
 - Outputs: features/{app-foundation,data-foundation}/{requirements,requirement-verification-questions,status}.md, aidlc-state.md
+
+## [ANSWER] F-2 Q1~Q3 / [GATE-2] data-foundation
+- Timestamp: 2026-08-31T22:00:00+09:00
+- Feature: data-foundation
+- Question: Q1~Q3
+- User Input: "답변 완료." (파일 기입 — Q1: "B", Q2: "B", Q3: "A")
+- Impact: GATE-2 approved. Q1=B는 AI 추천(A)과 다른 사용자 결정 — :core:model+:core:data 분리 확정. Q2=B로 g 필드 제외 — F-4 칼로리 계산은 라벨 기반 추정 경로만 (요구사항 반영). 모순 검출: 없음. Readiness 76→90 READY. [확신: 확실]×3
+
+## [STEP-6] data-foundation UOW — completed
+- Timestamp: 2026-08-31T22:02:00+09:00
+- Feature: data-foundation
+- Step: STEP-6
+- Action: completed
+- Reason: 4 UOW (S/M/M/M) 직렬. Self-Verification: 근거=답변+source-plan+ADR-0001. M 3건 → 기술설계 필수
+- Outputs: unit-of-work.md
+
+## [STATUS] F-1 GATE-2 보류
+- Timestamp: 2026-08-31T22:02:00+09:00
+- Feature: app-foundation
+- Previous: questions-open
+- Current: questions-open (변동 없음)
+- Trigger: F-1 Q1·Q2 미답변 — Q2(iOS 최소 버전)는 BLOCK이라 게이트 통과 불가, 재제시

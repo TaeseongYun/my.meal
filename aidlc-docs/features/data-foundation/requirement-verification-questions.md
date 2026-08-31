@@ -5,9 +5,9 @@
 ## Summary
 | # | Priority | Type | 질문 | If unanswered | 상태 |
 |---|----------|------|------|---------------|------|
-| Q1 | P1-IMPORTANT | domain | 데이터 모듈 배치 | AI-RECOMMEND-A | 미답변 |
-| Q2 | P1-IMPORTANT | domain | 음식 양(amount) 표현 방식 | AI-RECOMMEND-C | 미답변 |
-| Q3 | P1-IMPORTANT | domain | 총 예상 칼로리 저장 방식 | AI-RECOMMEND-A | 미답변 |
+| Q1 | P1-IMPORTANT | domain | 데이터 모듈 배치 | AI-RECOMMEND-A | 답변됨: B |
+| Q2 | P1-IMPORTANT | domain | 음식 양(amount) 표현 방식 | AI-RECOMMEND-C | 답변됨: B |
+| Q3 | P1-IMPORTANT | domain | 총 예상 칼로리 저장 방식 | AI-RECOMMEND-A | 답변됨: A |
 
 BLOCK 0건. 질문 예산: comprehensive 12 중 3 사용.
 
@@ -23,8 +23,8 @@ BLOCK 0건. 질문 예산: comprehensive 12 중 3 사용.
   - B) `:core:model` + `:core:data` 분리 (DroidKaigi 동형) → 도메인 모델 독립성 명확, 모듈 2개
 - AI Recommendation: A — Rationale: 현재 도메인 모델 소비자가 data 소비자와 동일. 모델 독립 소비자(예: F-4 추론 결과 타입 공유)가 생기면 :core:model 분리는 기계적 이동. 빈 모듈 최소화 원칙 정합
 - If unanswered: AI-RECOMMEND-A
-- [Answer]:
-- [Confidence]:
+- [Answer]: B
+- [Confidence]: 확실
 
 ### Q2. 음식 항목의 양(amount)은 어떻게 저장할까요? (소스 문서: "음식명, 양 또는 g 값을 확인·수정")
 - Priority: P1-IMPORTANT
@@ -39,8 +39,8 @@ BLOCK 0건. 질문 예산: comprehensive 12 중 3 사용.
   - C) 라벨 + 선택적 g (amountLabel: String?, amountGram: Int?) → 소스 문서의 "양 또는 g" 문구 그대로, 둘 다 수용
 - AI Recommendation: C — Rationale: 소스 문서가 두 표현을 병기. F-4에서 g 있으면 정밀 계산, 없으면 라벨 기반 추정으로 흐름 유지
 - If unanswered: AI-RECOMMEND-C
-- [Answer]:
-- [Confidence]:
+- [Answer]: B
+- [Confidence]: 확실
 
 ### Q3. 기록의 총 예상 칼로리는 저장할까요, 계산할까요?
 - Priority: P1-IMPORTANT
@@ -54,8 +54,8 @@ BLOCK 0건. 질문 예산: comprehensive 12 중 3 사용.
   - B) entry에 저장 → 항목 수정 시 갱신 누락 위험
 - AI Recommendation: A — Rationale: 기록당 항목 수가 소수(한 끼 식사). 저장 시 불일치 버그 위험만 추가. 성능 최적화는 측정 근거 있을 때만(품질 기준)
 - If unanswered: AI-RECOMMEND-A
-- [Answer]:
-- [Confidence]:
+- [Answer]: A
+- [Confidence]: 확실
 
 ## AI 자동 결정 (P2)
 | # | 항목 | 기본값 | 근거 | 변경 영향 |

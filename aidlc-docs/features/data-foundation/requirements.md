@@ -10,7 +10,7 @@
 - **Room KMP**: meal_entries / meal_items 스키마·DAO (Q2·Q3에서 필드 확정)
 - **이미지 파일 저장소**: 앱 내부 저장, DB에는 경로/메타만 (원본 Bitmap 저장 금지)
 - **repository 인터페이스**: 기록 CRUD + 조회(날짜별) — 도메인 모델은 플랫폼 타입 무참조
-- **모듈**: Q1에서 배치 확정 (ADR-0001 구조 내)
+- **모듈**: `:core:model`(도메인 모델) + `:core:data`(Room·이미지 저장·repository) — Q1=B 확정 (DroidKaigi 동형)
 - **commonTest**: DAO/repository 단위 테스트 (kotlin.test + kotlinx-coroutines-test)
 - **버전 카탈로그**: room/sqlite 신규 항목 (버전 구현 시점 검증)
 
@@ -19,19 +19,19 @@
 - 업로드용 이미지 리사이즈·압축(F-6), 화면(F-3/F-5), 영양 데이터(F-4)
 
 ## Functional Requirements
-- FR-1: 기록(entry: 사진 경로, 식사 시각, 메모)과 음식 항목(item: 이름, 양, 예상 칼로리)을 저장·수정·삭제할 수 있다
+- FR-1: 기록(entry: 사진 경로, 식사 시각, 메모)과 음식 항목(item: 이름, 양 라벨(자유 텍스트), 예상 칼로리)을 저장·수정·삭제할 수 있다 (Q2=B: g 필드 없음)
 - FR-2: 앱 재실행 후 저장된 기록이 복원된다 (로컬 우선 — 네트워크 무관)
 - FR-3: 날짜(일 단위)로 기록 목록을 조회할 수 있다 (F-5 캘린더/타임라인 전제)
 - FR-4: 이미지 파일 저장·조회·삭제 API를 제공하고 entry 삭제 시 파일도 정리된다
 - FR-5: 도메인 모델은 Compose/Android/iOS 타입을 참조하지 않는다
-- FR-6: 총 예상 칼로리는 Q3 결정에 따른다
+- FR-6: 총 예상 칼로리는 항목 합산으로 계산한다 — 저장하지 않음 (Q3=A)
 
 ## Derived Requirements
 - DR-1: Room KMP는 각 타깃 SQLite 드라이버 구성 필요 — 공식 문서 기준 구현 시 검증
 - DR-2: 스키마 버전 1로 시작, F-6 확장은 migration으로 (버전 관리 규약 명시)
 
 ## Requirement Gaps
-Q1(모듈 배치), Q2(양 표현), Q3(총 칼로리), P2 자동결정 4건 — questions 파일 참조.
+~~Q1~Q3~~ 전건 답변 완료 (2026-08-31): 모듈=B(:core:model+:core:data), 양=B(자유 라벨만 — F-4는 라벨 기반 추정으로 칼로리 계산), 칼로리=A(합산 계산). P2 자동결정 4건은 questions 파일.
 
 ## Initial Risk Assessment
 | 리스크 | 수준 | 대응 |
