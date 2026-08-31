@@ -1,4 +1,4 @@
-package com.devts.mymeal.features.login
+package com.devts.mymeal.features.login.presentation
 
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
