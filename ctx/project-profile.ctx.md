@@ -5,7 +5,7 @@
 - language: Kotlin (iOS 진입점만 SwiftUI)
 - test-strategy: test-after
 - project-state: greenfield 1인 개발 (design-system 파운데이션은 구현·머지 완료 — 예외적 기구현 자산)
-- platform-guidance: /Users/yoontaeseong/work/aidlc-workflow/platforms/kmp/guidance.md (활성 코어 실경로. env `TEAM_AI_WORKFLOW_DIR`는 구사본을 가리키므로 신뢰하지 않는다)
+- platform-guidance: /Users/yoontaeseong/work/aidlc-workflow/platforms/kmp/guidance.md (활성 코어 실경로. env `TEAM_AI_WORKFLOW_DIR`도 동일 경로로 수정됨 — 2026-08-31)
 
 ## 개발자 컨텍스트
 
