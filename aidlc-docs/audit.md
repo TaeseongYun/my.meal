@@ -403,3 +403,9 @@ Representative case: `ctx-aidlc-run` STEP 1-A detects multi-feature → guides r
 - Action: completed
 - Reason: M 3건. Self-Verification: 근거=GATE-2 답변+source-plan+ADR-0001. 대안(SQLDelight) 기각 근거 기재. UNCERTAIN 1건(Room KMP 구성 세부 — 구현 시 검증) 게이트에 노출
 - Outputs: technical-design.md
+
+## [GATE-3.5] data-foundation / [질문] F-1 GATE-3 보류
+- Timestamp: 2026-08-31T22:40:00+09:00
+- Feature: data-foundation, app-foundation
+- User Input: "[F-1 GATE-3]"="왜 hilt 를 안쓰고 koin 을 쓰는지만 알려주세요.", "[F-2 GATE-3.5]"="승인"
+- Notes: F-2 GATE-3.5 approved → STEP 7~9 완료(build/test instructions, Readiness 90 READY), GATE-5 대기. F-1 GATE-3은 Hilt/Koin 설명 요청으로 보류 — 답변 후 재제시. 참고: Koin은 사용자 제공 프로필 §2의 승인 스택("DI는 Koin 한 종류만")이며 Hilt는 Android 전용이라 KMP commonMain/iOS에서 사용 불가

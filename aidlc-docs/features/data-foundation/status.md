@@ -32,4 +32,7 @@
 - [x] STEP 6 (UOW 4개: S/M/M/M)
 - [x] GATE-3 승인 (2026-08-31, AskUserQuestion "승인")
 - [x] STEP 6.5 (technical-design.md — ADR 3건)
-- [ ] GATE-3.5 ← **대기 중**
+- [x] GATE-3.5 승인 (2026-08-31)
+- [-] STEP 6.7/GATE-4 스킵 (인프라 없음)
+- [x] STEP 7~9 (Readiness 90 유지 READY / build·test instructions)
+- [ ] GATE-5 ← **대기 중** (통과 시 워크트리 /ctx-run)
