@@ -4,11 +4,18 @@
 > **Request Anchor**: 로드맵 F-1 — 앱 골격(내비·DI·UDF·로깅) (Nav Compose, Koin, Kermit, iOS 17.0 확정).
 
 ## Implementation Scope
-- production / Mock: none / 제외: 로그인 실동작(F-6), 딥링크, 추가 화면
+- production / Mock: none / 제외: 로그인 실동작(F-6), 딥링크, 추가 화면 (home destination은 예외 — 2026-09-03 개정 참조)
 
 ## 1. Design Overview
 - Target: shared(조립 루트) 중심 + androidApp/iosApp 초기화 지점, :feature:login 재연결
-- brownfield touchpoints: shared(App.kt·신규 골격 파일), feature/login(destination 등록·ViewModel), androidApp(Application 신설), iosApp(pbxproj 17.0), 카탈로그/settings
+- brownfield touchpoints: shared(App.kt·신규 골격 파일), feature/login(destination 등록·ViewModel), feature/home(destination 등록 — 개정), androidApp(Application 신설), iosApp(pbxproj 17.0), 카탈로그/settings
+
+### 개정 2026-09-03 (홈 UI 머지 반영 — 사용자 승인 계획)
+main에 `:feature:home` 머지됨(PR #5). `shared/App.kt`의 임시 `remember` 전환(홈 UI-slice의
+이연 항목 "내비게이션 정식 연결 → F-1")을 이 피처가 흡수한다:
+- `:feature:home`에 `HomeRoute` + `homeDestination()` 등록 (규약 동일 — 라우트는 피처 소유)
+- 로그인 성공(카카오/이메일 클릭) → `LoginEffect.NavigateToHome` → NavHost가 `HomeRoute`로 전환
+- 홈 상태는 기존 `stubHomeUiState()` 공급 유지 — HomeViewModel/실데이터는 F-5 소관 (범위 아님)
 
 ## 2. Architecture Decisions
 ### ADR-1. JetBrains Navigation Compose + type-safe 라우트
@@ -30,11 +37,14 @@ fun initKoin()                      // 플랫폼 진입점이 호출
 @Composable fun App()               // NavHost(시작: LoginRoute)
 // :feature:login
 @Serializable data object LoginRoute
-fun NavGraphBuilder.loginDestination()          // 내부에서 LoginViewModel 주입
+fun NavGraphBuilder.loginDestination(onNavigateToHome: () -> Unit)  // 내부에서 LoginViewModel 주입
 class LoginViewModel : ViewModel { val uiState: StateFlow<LoginUiState>; fun onAction(a: LoginAction); val effects: Flow<LoginEffect> }
 data class LoginUiState(...초기 골격...)
 sealed interface LoginAction { data object KakaoClick; data object EmailClick }
-sealed interface LoginEffect                      // Channel 기반 — State에 이벤트 금지
+sealed interface LoginEffect { data object NavigateToHome }         // Channel 기반 — State에 이벤트 금지
+// :feature:home (개정 2026-09-03)
+@Serializable data object HomeRoute
+fun NavGraphBuilder.homeDestination()           // 내부는 기존 HomeScreen + stubHomeUiState (F-5 전까지)
 ```
 HTTP API 없음. 로깅: Kermit 루트 로거 태그 규약("Sikdorok"), 개인정보 금지 규약 CTX 반영.
 
@@ -49,8 +59,9 @@ Not applicable.
 | shared …/di/AppModule.kt, KoinInit.kt | 루트 DI | 2 |
 | androidApp MymealApplication.kt(+Manifest) | startKoin | 2 |
 | shared …/MainViewController.kt | initKoin 후 App | 2 |
-| shared App.kt(NavHost) | 조립 | 3 |
+| shared App.kt(NavHost) | 조립 — 임시 remember 전환 제거 | 3 |
 | feature/login …/LoginRoute·loginDestination | 등록 규약 | 3 |
+| feature/home …/HomeRoute·homeDestination (+build.gradle.kts nav 의존) | 등록 규약 (개정) | 3 |
 | feature/login …/LoginViewModel·UiState·Action | UDF 골격 | 4 |
 | shared …/logging/ | Kermit 초기화 | 4 |
 
@@ -66,7 +77,7 @@ App 기동 → initKoin → App(NavHost, start=LoginRoute) → loginDestination 
 |---|---|---|
 | 1 | 빌드 | 전 모듈 컴파일(android+iOS) |
 | 2 | 단위 | Koin 모듈 구성 검증(전 정의 resolve) |
-| 3 | 빌드+실행 | 앱 시작 시 login 표시(에뮬레이터 확인) |
+| 3 | 빌드+실행 | 앱 시작 시 login 표시 + 카카오/이메일 클릭 → 홈 전환(에뮬레이터 확인) |
 | 4 | 단위 | LoginViewModel Action→State/Effect 전이 (kotlinx-coroutines-test+Turbine — Turbine 버전 검증 후 추가) |
 
 ## 9. Open Items

@@ -447,3 +447,17 @@ Representative case: `ctx-aidlc-run` STEP 1-A detects multi-feature → guides r
 - Reason: ROLE 0 판단불가 0 → 설계검증 PASS(Open Item은 해소 절차 정의 항목) → ROLE 1 구현+빌드 PASSED → ROLE 2 테스트(jvm 9/9, iOS sim green, 전체 회귀) → ROLE 3 위반 0·규칙 2건 → ROLE 4 CTX 3건 반영+설계 문서 이탈 기록 → ROLE 5 정제(삭제 대상 없음)
 - 버전 검증 근거: room-runtime/gradle-plugin 2.8.4·sqlite-bundled 2.7.0(dl.google.com group-index), ksp 2.3.11(maven.org plugin marker), kotlinx-datetime 0.8.0·coroutines 1.11.0(maven.org metadata)
 - Outputs: :core:model, :core:data (스키마 v1 export 포함), 테스트 3파일, CTX INDEX 3건
+
+## [GATE-3.5] app-foundation — approved
+- Timestamp: 2026-09-03T18:40:00+09:00
+- Feature: app-foundation
+- Decision: approved
+- User Input: "승인" (AskUserQuestion)
+- Notes: 설계 개정분 포함 승인 — 홈 UI 머지(PR #5) 반영: :feature:home HomeRoute/homeDestination 등록, LoginEffect.NavigateToHome, App.kt 임시 remember 전환 제거를 UOW-3에 흡수 (사용자 승인 계획 2026-09-03). STEP 7~9 완료(build/test instructions, Readiness 90 READY 유지) → GATE-5 대기
+
+## [GATE-5] app-foundation — approved
+- Timestamp: 2026-09-03T18:45:00+09:00
+- Feature: app-foundation
+- Decision: approved
+- User Input: "승인 — 구현 개시" (AskUserQuestion)
+- Notes: app-foundation 워크트리에서 UOW-1~4 구현 → ctx-score-loop 자율 진행 (승인 계획 Step 1)

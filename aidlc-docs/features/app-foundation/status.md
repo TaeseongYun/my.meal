@@ -1,11 +1,11 @@
 # Status — app-foundation (F-1)
 
 - Feature: app-foundation
-- Status: **in-design** (GATE-2 통과)
+- Status: **implementation-ready** (GATE-3.5 승인, GATE-5 대기)
 - Request Type: prepared-requirement (_source-plan.md §기술 방향·구조 설계 원칙 발췌)
 - Depth Level: comprehensive
 - Project State: brownfield (F-0 design-system, :feature:login 기구현)
-- Last Updated: 2026-08-31
+- Last Updated: 2026-09-03
 
 ## Roadmap Context
 - Roadmap Source: F-1 (`_roadmap.md`)
@@ -32,4 +32,7 @@
 - [x] STEP 6 (UOW 4개: M/M/M/M)
 - [x] GATE-3 승인 (2026-08-31, "둘 다 승인")
 - [x] STEP 6.5 (technical-design.md — ADR 3건)
-- [ ] GATE-3.5 ← **대기 중**
+- [x] 설계 개정 (2026-09-03: 홈 UI 머지 반영 — HomeRoute/homeDestination, 임시 remember 전환 제거를 UOW-3에 흡수. 사용자 승인 계획 기반)
+- [x] GATE-3.5 승인 (2026-09-03)
+- [x] STEP 7~9 (build-instructions.md, test-instructions.md, Readiness 90 READY 유지)
+- [ ] GATE-5 (구현 개시) ← **대기 중**
