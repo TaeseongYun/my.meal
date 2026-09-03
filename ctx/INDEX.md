@@ -7,11 +7,12 @@
 - 기술 스택/아키텍처 규칙의 source of truth: ctx/project-profile.ctx.md
 
 ## Key Modules
-- `:shared` — 공유 로직 + UI (iOS framework "Shared")
+- `:shared` — 공유 로직 + UI 조립 루트: NavHost·Koin initKoin/appModules (iOS framework "Shared")
 - `:androidApp` — Android 엔트리
 - `:core:designsystem` — 디자인 토큰/테마 (SikdorokTheme)
 - `:core:model` — 도메인 모델(순수 Kotlin)
 - `:core:data` — Room KMP 로컬 저장+사진 파일(스키마 v1)
+- `:feature:login` / `:feature:home` — 화면 피처 (destination 등록 함수 + Koin module만 노출)
 
 ## Constraints
 - UI 코드에서 색·치수·TextStyle 리터럴을 하드코딩하지 말고 SikdorokTheme 접근자를 사용하라.
@@ -20,3 +21,5 @@
 - GATE 승인 전 프로덕션 코드와 스캐폴딩을 생성하지 마라.
 - KMP 모듈에서 소스셋 dependsOn을 수동 추가할 때 applyDefaultHierarchyTemplate()를 명시하라.
 - Room 스키마를 바꿀 때 version 증가와 core/data/schemas/ export를 함께 커밋하라.
+- 로그(Kermit, 태그 "Sikdorok")에 사진 경로·기록 내용·계정 ID 등 개인정보를 남기지 마라.
+- 피처 모듈은 자기 destination 등록 함수(`NavGraphBuilder.<slug>Destination`)와 Koin module만 노출하고, 피처 간 직접 의존을 만들지 마라. 신규 피처는 shared의 appModules()·NavHost에만 등록을 추가하라.

@@ -1,11 +1,12 @@
 # Status — app-foundation (F-1)
 
 - Feature: app-foundation
-- Status: **in-design** (GATE-2 통과)
+- Status: **구현 완료 — score loop COMPLETE**
+- Post-Implementation Score: **98/100** (round 1, COMPLETE — dependency-check.md 참조)
 - Request Type: prepared-requirement (_source-plan.md §기술 방향·구조 설계 원칙 발췌)
 - Depth Level: comprehensive
 - Project State: brownfield (F-0 design-system, :feature:login 기구현)
-- Last Updated: 2026-08-31
+- Last Updated: 2026-09-03
 
 ## Roadmap Context
 - Roadmap Source: F-1 (`_roadmap.md`)
@@ -32,4 +33,10 @@
 - [x] STEP 6 (UOW 4개: M/M/M/M)
 - [x] GATE-3 승인 (2026-08-31, "둘 다 승인")
 - [x] STEP 6.5 (technical-design.md — ADR 3건)
-- [ ] GATE-3.5 ← **대기 중**
+- [x] 설계 개정 (2026-09-03: 홈 UI 머지 반영 — HomeRoute/homeDestination, 임시 remember 전환 제거를 UOW-3에 흡수. 사용자 승인 계획 기반)
+- [x] GATE-3.5 승인 (2026-09-03)
+- [x] STEP 7~9 (build-instructions.md, test-instructions.md, Readiness 90 READY 유지)
+- [x] GATE-5 승인 (2026-09-03) — 구현 개시
+- [x] UOW-1~4 구현 (커밋 6be0700, 4b95660) + CTX Constraints 2건 반영
+- [x] ctx-score-loop round 1 — **98/100 COMPLETE** (Dependency 25 · Build 25 · Test 25 · AC 23)
+- 잔여: iOS 로그인 탭→홈 전환 육안 확인(환경상 터치 주입 불가 — 공통 코드는 Android 검증), UNCERTAIN(Nav iOS 실동작)은 기동·렌더까지 해소
