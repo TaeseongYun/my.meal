@@ -1,5 +1,6 @@
 package com.devts.mymeal.core.data.db
 
+import androidx.room.AutoMigration
 import androidx.room.ConstructedBy
 import androidx.room.Database
 import androidx.room.RoomDatabase
@@ -8,7 +9,11 @@ import androidx.sqlite.driver.bundled.BundledSQLiteDriver
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.IO
 
-@Database(entities = [MealEntryEntity::class, MealItemEntity::class], version = 1)
+@Database(
+    entities = [MealEntryEntity::class, MealItemEntity::class],
+    version = 2,
+    autoMigrations = [AutoMigration(from = 1, to = 2)], // v2: meal_entries.meal_type (기본 DINNER)
+)
 @ConstructedBy(MymealDatabaseConstructor::class)
 abstract class MymealDatabase : RoomDatabase() {
     abstract fun mealDao(): MealDao

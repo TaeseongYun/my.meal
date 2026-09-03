@@ -7,12 +7,15 @@ package com.devts.mymeal.core.model
 data class MealEntry(
     val id: String,
     val mealAt: Long,          // epoch ms UTC
+    val mealType: MealType,    // 스키마 v2 (F-5 Q1=A, 2026-09-03)
     val note: String?,
     val photoPath: String?,
     val createdAt: Long,
     val updatedAt: Long,
     val items: List<MealItem>,
 )
+
+enum class MealType { BREAKFAST, LUNCH, DINNER }
 
 data class MealItem(
     val id: String,

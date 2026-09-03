@@ -8,11 +8,12 @@ import androidx.room.Index
 import androidx.room.PrimaryKey
 import androidx.room.Relation
 
-// 스키마 v1 — technical-design.md §4. sync/soft-delete 필드 금지(F-6 소관)
+// 스키마 v2 — technical-design.md §4 + diary ADR-D1(meal_type). sync/soft-delete 필드 금지(F-6 소관)
 @Entity(tableName = "meal_entries", indices = [Index("meal_at")])
 data class MealEntryEntity(
     @PrimaryKey val id: String,
     @ColumnInfo(name = "meal_at") val mealAt: Long,
+    @ColumnInfo(name = "meal_type", defaultValue = "DINNER") val mealType: String,
     val note: String?,
     @ColumnInfo(name = "photo_path") val photoPath: String?,
     @ColumnInfo(name = "created_at") val createdAt: Long,
