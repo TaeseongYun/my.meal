@@ -477,3 +477,10 @@ Representative case: `ctx-aidlc-run` STEP 1-A detects multi-feature → guides r
 - Action: completed
 - Reason: Dependency 25/25 · Build 25/25 · Test 25/25 · AC 23/25 = 98/100 > 85 & 빌드 축 ≠ 0 (GR-1/GR-2 통과). 증빙: f1-score-round1.log(FAILED 0), xcodebuild BUILD SUCCEEDED, 스크린샷 3종(Android login/home 전환, iOS login 렌더). 감점 −2: iOS 전환 탭 육안 미검증(simctl 터치 주입 미지원·osascript 접근성 권한 부재 — 공통 코드는 Android 검증). 루프 종료
 - Outputs: features/app-foundation/dependency-check.md(Score History round 1), status.md(점수 미러)
+
+## [GATE] diary(F-5 홈 슬라이스)·record(F-3) — GATE-2·3·3.5·5 일괄 승인
+- Timestamp: 2026-09-03T19:55:00+09:00
+- Feature: diary, record
+- Decision: approved / approved
+- User Input: "일괄 승인" ×2 (AskUserQuestion). STEP 4 답변: Q1 mealType 스키마 v2(공유), Q2 최신 1건, Q3 "디자인 샘플처럼 스텁 데이터를 랜덤으로"(커스텀), 사진 입력 expect/actual 직접
+- Notes: 실행 순서 — diary 선행(스키마 v2 포함) 구현·머지 → record 리베이스 후 구현 (Room 스키마 single-owner 충돌 차단). Readiness: diary 93 / record 91
