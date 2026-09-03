@@ -416,3 +416,12 @@ Representative case: `ctx-aidlc-run` STEP 1-A detects multi-feature → guides r
 - Decision: approved / approved
 - User Input: "둘 다 승인"
 - Notes: F-1 STEP 6.5 완료(ADR: Nav Compose+type-safe 라우트/Koin 부트스트랩+구성검증 테스트/iOS 17.0) → GATE-3.5 대기. F-2 전 게이트 통과 → 워크트리 구현 개시
+
+## [STEP] ctx-run data-foundation Implementation — completed
+- Timestamp: 2026-08-31T23:59:00+09:00
+- Feature: data-foundation
+- Step: ctx-run ROLE 0~5
+- Action: completed
+- Reason: ROLE 0 판단불가 0 → 설계검증 PASS(Open Item은 해소 절차 정의 항목) → ROLE 1 구현+빌드 PASSED → ROLE 2 테스트(jvm 9/9, iOS sim green, 전체 회귀) → ROLE 3 위반 0·규칙 2건 → ROLE 4 CTX 3건 반영+설계 문서 이탈 기록 → ROLE 5 정제(삭제 대상 없음)
+- 버전 검증 근거: room-runtime/gradle-plugin 2.8.4·sqlite-bundled 2.7.0(dl.google.com group-index), ksp 2.3.11(maven.org plugin marker), kotlinx-datetime 0.8.0·coroutines 1.11.0(maven.org metadata)
+- Outputs: :core:model, :core:data (스키마 v1 export 포함), 테스트 3파일, CTX INDEX 3건
