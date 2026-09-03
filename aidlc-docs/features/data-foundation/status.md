@@ -1,7 +1,7 @@
 # Status — data-foundation (F-2)
 
 - Feature: data-foundation
-- Status: **in-design** (GATE-2 통과)
+- Status: **implemented** (2026-08-31, 워크트리 data-foundation)
 - Request Type: prepared-requirement (_source-plan.md §데이터 및 백엔드 방향 발췌)
 - Depth Level: comprehensive
 - Project State: brownfield
@@ -32,4 +32,9 @@
 - [x] STEP 6 (UOW 4개: S/M/M/M)
 - [x] GATE-3 승인 (2026-08-31, AskUserQuestion "승인")
 - [x] STEP 6.5 (technical-design.md — ADR 3건)
-- [ ] GATE-3.5 ← **대기 중**
+- [x] GATE-3.5 승인 (2026-08-31)
+- [-] STEP 6.7/GATE-4 스킵 (인프라 없음)
+- [x] STEP 7~9 (Readiness 90 유지 READY / build·test instructions)
+- [x] GATE-5 승인 (2026-08-31, "둘 다 승인") → 워크트리 data-foundation에서 /ctx-run
+- [x] 구현 완료 (/ctx-run ROLE 0~6): UOW-1~4, 테스트 jvm 9/9 + iOS sim green, 전체 회귀 통과
+- [ ] 잔여: main 병합(PR), F-3 소비 시 android 런타임 실기 검증

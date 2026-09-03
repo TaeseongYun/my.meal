@@ -426,3 +426,24 @@ Representative case: `ctx-aidlc-run` STEP 1-A detects multi-feature → guides r
 - Action: completed
 - Reason: Dependency 25/25 · Build 25/25 · Test 25/25 · AC 23/25 = 98/100 > 85 & 빌드 축 ≠ 0 (GR-1/GR-2 통과). 증빙: 5개 명령 exit 0(score-round1.log), --rerun-tasks 테스트 7/7×2, AC 4/4 스크린샷. 감점 −2: 아침/점심 이모지 추정·주차 라벨 규칙(디자이너 확인 항목). 루프 종료
 - Outputs: features/home/dependency-check.md(Score History round 1), features/home/status.md(점수 미러)
+## [GATE-3.5] data-foundation / [질문] F-1 GATE-3 보류
+- Timestamp: 2026-08-31T22:40:00+09:00
+- Feature: data-foundation, app-foundation
+- User Input: "[F-1 GATE-3]"="왜 hilt 를 안쓰고 koin 을 쓰는지만 알려주세요.", "[F-2 GATE-3.5]"="승인"
+- Notes: F-2 GATE-3.5 approved → STEP 7~9 완료(build/test instructions, Readiness 90 READY), GATE-5 대기. F-1 GATE-3은 Hilt/Koin 설명 요청으로 보류 — 답변 후 재제시. 참고: Koin은 사용자 제공 프로필 §2의 승인 스택("DI는 Koin 한 종류만")이며 Hilt는 Android 전용이라 KMP commonMain/iOS에서 사용 불가
+
+## [GATE-3] app-foundation / [GATE-5] data-foundation
+- Timestamp: 2026-08-31T23:00:00+09:00
+- Feature: app-foundation, data-foundation
+- Decision: approved / approved
+- User Input: "둘 다 승인"
+- Notes: F-1 STEP 6.5 완료(ADR: Nav Compose+type-safe 라우트/Koin 부트스트랩+구성검증 테스트/iOS 17.0) → GATE-3.5 대기. F-2 전 게이트 통과 → 워크트리 구현 개시
+
+## [STEP] ctx-run data-foundation Implementation — completed
+- Timestamp: 2026-08-31T23:59:00+09:00
+- Feature: data-foundation
+- Step: ctx-run ROLE 0~5
+- Action: completed
+- Reason: ROLE 0 판단불가 0 → 설계검증 PASS(Open Item은 해소 절차 정의 항목) → ROLE 1 구현+빌드 PASSED → ROLE 2 테스트(jvm 9/9, iOS sim green, 전체 회귀) → ROLE 3 위반 0·규칙 2건 → ROLE 4 CTX 3건 반영+설계 문서 이탈 기록 → ROLE 5 정제(삭제 대상 없음)
+- 버전 검증 근거: room-runtime/gradle-plugin 2.8.4·sqlite-bundled 2.7.0(dl.google.com group-index), ksp 2.3.11(maven.org plugin marker), kotlinx-datetime 0.8.0·coroutines 1.11.0(maven.org metadata)
+- Outputs: :core:model, :core:data (스키마 v1 export 포함), 테스트 3파일, CTX INDEX 3건

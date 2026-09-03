@@ -30,4 +30,6 @@
 - [x] STEP 1/1-B/1-C/2/3/4/5 (RE 기존 산출물 참조 — STEP 1.5 스킵)
 - [x] GATE-2 통과 (2026-08-31, Q1=A, Q2=17.0)
 - [x] STEP 6 (UOW 4개: M/M/M/M)
-- [ ] GATE-3 ← **대기 중**
+- [x] GATE-3 승인 (2026-08-31, "둘 다 승인")
+- [x] STEP 6.5 (technical-design.md — ADR 3건)
+- [ ] GATE-3.5 ← **대기 중**
