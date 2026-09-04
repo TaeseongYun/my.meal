@@ -11,7 +11,7 @@ Update rules:
 ## Project Information
 - Project Type: brownfield (KMP 템플릿, 도메인 코드 없음)
 - Start Date: 2026-08-27
-- Current Stage: Phase 1 — F-1 GATE-5 대기 (GATE-3.5 승인 2026-09-03) / F-2 완료·머지(PR #4). 홈 UI-slice 머지(PR #5)
+- Current Stage: Phase 1 완료 — F-1 머지(PR #6) / F-2 머지(PR #4). UI 슬라이스: 홈(PR #5), 기록 화면(F-3 UI, 2026-09-03)
 - Current Feature: design-system
 
 ## Workspace State
@@ -32,7 +32,7 @@ Update rules:
 | design-system | completed | F-0 (소급 편입) | yts0646 |
 | app-foundation | implementation-ready | F-1 | yts0646 |
 | data-foundation | in-design | F-2 | yts0646 |
-| record | ready | F-3 | yts0646 |
+| record | ui-implemented | F-3 | yts0646 |
 | food-analysis | ready | F-4 | yts0646 |
 | diary | ready | F-5 | yts0646 |
 | account-sync | ready | F-6 | yts0646 |
