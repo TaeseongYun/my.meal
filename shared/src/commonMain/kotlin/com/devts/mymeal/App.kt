@@ -10,9 +10,11 @@ import com.devts.mymeal.feature.home.HomeRoute
 import com.devts.mymeal.feature.home.homeDestination
 import com.devts.mymeal.feature.login.LoginRoute
 import com.devts.mymeal.feature.login.loginDestination
+import com.devts.mymeal.feature.record.RecordRoute
+import com.devts.mymeal.feature.record.recordDestination
 
 // 첫 화면 = 로그인 (Figma 832:48657) → 로그인 액션 시 홈 (Figma 832:92613).
-// 홈 데이터는 화면 구성 스텁 — F-5에서 실데이터 연결.
+// 홈 FAB → 기록 생성/수정 (Figma 832:98315). 홈·기록 데이터는 화면 구성 스텁 — F-2/F-5에서 연결.
 @Composable
 @Preview
 fun App() {
@@ -27,7 +29,8 @@ fun App() {
                     )
                 },
             )
-            homeDestination()
+            homeDestination(onNavigateToRecord = { navController.navigate(RecordRoute) })
+            recordDestination(onBack = { navController.popBackStack() })
         }
     }
 }
