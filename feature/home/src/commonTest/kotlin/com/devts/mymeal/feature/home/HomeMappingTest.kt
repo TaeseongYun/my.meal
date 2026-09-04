@@ -20,8 +20,53 @@ class HomeMappingTest {
     private fun at(date: LocalDate, hour: Int, minute: Int): Long =
         LocalDateTime(date.year, date.month, date.day, hour, minute).toInstant(tz).toEpochMilliseconds()
 
-    private fun entry(id: String, mealAt: Long, type: MealType, note: String? = null, photoPath: String? = null) =
-        MealEntry(id, mealAt, type, note, photoPath, 0L, 0L, emptyList())
+    private fun entry(
+        id: String,
+        mealAt: Long,
+        type: MealType,
+        note: String? = null,
+        photoPath: String? = null,
+        foodEmoji: String? = null,
+        isRepresentative: Boolean = false,
+    ) = MealEntry(id, mealAt, type, note, photoPath, 0L, 0L, emptyList(), foodEmoji, isRepresentative)
+
+    @Test
+    fun dayMark_prefersRepresentativeEmoji_thenLatest_thenStub() {
+        val base = at(today, 8, 0)
+        // 대표 우선
+        assertEquals(
+            "🍜",
+            dayMarkEmoji(
+                listOf(
+                    entry("a", base + 2, MealType.DINNER, foodEmoji = "🍔"),
+                    entry("b", base, MealType.LUNCH, foodEmoji = "🍜", isRepresentative = true),
+                ),
+                today.day,
+            ),
+        )
+        // 대표 없음 → 최신 기록의 이모지
+        assertEquals(
+            "🍔",
+            dayMarkEmoji(
+                listOf(entry("a", base + 2, MealType.DINNER, foodEmoji = "🍔"), entry("b", base, MealType.LUNCH, foodEmoji = "🍜")),
+                today.day,
+            ),
+        )
+        // 이모지 없는 기록만 → 스텁
+        assertEquals(
+            STUB_MARKS[today.day % STUB_MARKS.size],
+            dayMarkEmoji(listOf(entry("a", base, MealType.LUNCH)), today.day),
+        )
+    }
+
+    @Test
+    fun menuEmoji_usesFoodEmojiWhenPresent() {
+        val byDay = week.map { date ->
+            if (date == today) listOf(entry("e1", at(today, 12, 0), MealType.LUNCH, foodEmoji = "🍣")) else emptyList()
+        }
+        val slot = mapToHomeUiState(today, week, byDay, tz).meals[MealType.LUNCH.ordinal]
+        assertEquals("🍣", slot.menuEmoji)
+    }
 
     @Test
     fun recordedDay_getsDeterministicMark_unrecordedDay_getsNull() {

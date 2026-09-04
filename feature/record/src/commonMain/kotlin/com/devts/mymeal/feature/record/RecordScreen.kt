@@ -184,7 +184,7 @@ private fun RowScope.SlotChip(label: String, isSelected: Boolean, onClick: () ->
 
 @Composable
 private fun LunchboxPhotoFrame(
-    photo: org.jetbrains.compose.resources.DrawableResource?,
+    photo: androidx.compose.ui.graphics.ImageBitmap?,
     onCameraClick: () -> Unit,
     modifier: Modifier = Modifier,
 ) {
@@ -198,12 +198,21 @@ private fun LunchboxPhotoFrame(
             .padding(start = 8.dp, top = 8.dp, end = 8.dp, bottom = 24.dp),
     ) {
         Box(Modifier.fillMaxSize().clip(RoundedCornerShape(16.dp))) {
-            Image(
-                painterResource(photo ?: Res.drawable.lunchbox_placeholder),
-                contentDescription = if (photo != null) "도시락 사진" else null, // 자리표시자는 장식
-                modifier = Modifier.fillMaxSize(),
-                contentScale = ContentScale.Crop,
-            )
+            if (photo != null) {
+                Image(
+                    photo,
+                    contentDescription = "도시락 사진",
+                    modifier = Modifier.fillMaxSize(),
+                    contentScale = ContentScale.Crop,
+                )
+            } else {
+                Image(
+                    painterResource(Res.drawable.lunchbox_placeholder),
+                    contentDescription = null, // 자리표시자는 장식
+                    modifier = Modifier.fillMaxSize(),
+                    contentScale = ContentScale.Crop,
+                )
+            }
             Box(
                 modifier = Modifier
                     .align(Alignment.BottomEnd)

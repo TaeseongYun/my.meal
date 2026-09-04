@@ -6,6 +6,16 @@
 ## Implementation Scope
 - production / 제외: AI 인식·칼로리(F-4), 동기화(F-6), 수정·삭제(F-5 잔여)
 
+### 개정 2026-09-04 (UI 슬라이스 #7 머지 반영 — 사용자 답변 2건)
+- 실제 디자인 필드 = 끼니 칩 4개(간식 포함)·대표 음식 이모지 9종·대표 게시물 체크·메모·시각 —
+  §3의 "음식 항목 리스트(이름·섭취량)" 입력 폼은 디자인에 없음 → items는 빈 리스트로 저장, F-4에서 재검토
+- **스키마 v3** (사용자 확정): meal_entries.food_emoji(TEXT NULL)·is_representative(INTEGER 기본 0),
+  AutoMigration 2→3 + schemas/3.json. 홈 마크·메뉴 이모지는 foodEmoji 우선(없으면 스텁 랜덤)
+- **시간 변경** (사용자 확정): Material3 TimePicker 다이얼로그 (추가 의존 0)
+- ADR-R1 보강: iOS는 촬영·앨범 모두 UIImagePickerController 단일 딜레게이트
+  (ponytail: PHPicker 전환은 photoLibrary 소스 중단 시). Android 촬영은 FileProvider(cache/capture) 경유,
+  CAMERA 권한 미선언 유지(TakePicture는 시스템 카메라 위임)
+
 ## 1. Design Overview
 - brownfield touchpoints: :feature:record(신설), :feature:home(FAB 콜백 노출 — homeDestination(onEditClick)), :shared(NavHost dest 추가·appModules에 recordModule), androidApp Manifest(CAMERA), iosApp Info.plist(NSCameraUsageDescription·NSPhotoLibraryAddUsageDescription 불요 — PHPicker는 권한 불요)
 

@@ -11,8 +11,11 @@ import kotlinx.coroutines.IO
 
 @Database(
     entities = [MealEntryEntity::class, MealItemEntity::class],
-    version = 2,
-    autoMigrations = [AutoMigration(from = 1, to = 2)], // v2: meal_entries.meal_type (기본 DINNER)
+    version = 3,
+    autoMigrations = [
+        AutoMigration(from = 1, to = 2), // v2: meal_entries.meal_type (기본 DINNER)
+        AutoMigration(from = 2, to = 3), // v3: food_emoji(NULL)·is_representative(기본 0)
+    ],
 )
 @ConstructedBy(MymealDatabaseConstructor::class)
 abstract class MymealDatabase : RoomDatabase() {

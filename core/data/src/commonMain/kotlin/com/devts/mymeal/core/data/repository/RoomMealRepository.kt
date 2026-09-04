@@ -49,7 +49,10 @@ private fun MealEntryWithItems.toModel() = MealEntry(
     createdAt = entry.createdAt,
     updatedAt = entry.updatedAt,
     items = items.sortedBy { it.orderIndex }.map { MealItem(it.id, it.name, it.amountLabel, it.estimatedKcal, it.orderIndex) },
+    foodEmoji = entry.foodEmoji,
+    isRepresentative = entry.isRepresentative,
 )
 
-private fun MealEntry.toEntity() = MealEntryEntity(id, mealAt, mealType.name, note, photoPath, createdAt, updatedAt)
+private fun MealEntry.toEntity() =
+    MealEntryEntity(id, mealAt, mealType.name, note, photoPath, createdAt, updatedAt, foodEmoji, isRepresentative)
 private fun MealItem.toEntity(entryId: String) = MealItemEntity(id, entryId, name, amountLabel, estimatedKcal, orderIndex)

@@ -13,6 +13,8 @@ data class MealEntry(
     val createdAt: Long,
     val updatedAt: Long,
     val items: List<MealItem>,
+    val foodEmoji: String? = null,          // 스키마 v3 — 대표 음식 이모지 (F-3, 2026-09-04)
+    val isRepresentative: Boolean = false,  // 스키마 v3 — 대표 게시물
 )
 
 // SNACK 포함 4종 (record 디자인 832:98315, 사용자 확정 2026-09-04). 홈 캐러셀은 3끼만 표시.

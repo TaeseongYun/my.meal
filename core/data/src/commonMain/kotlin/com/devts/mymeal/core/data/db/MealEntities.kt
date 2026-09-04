@@ -8,7 +8,8 @@ import androidx.room.Index
 import androidx.room.PrimaryKey
 import androidx.room.Relation
 
-// 스키마 v2 — technical-design.md §4 + diary ADR-D1(meal_type). sync/soft-delete 필드 금지(F-6 소관)
+// 스키마 v3 — technical-design.md §4 + diary ADR-D1(meal_type) + record v3(food_emoji·is_representative).
+// sync/soft-delete 필드 금지(F-6 소관)
 @Entity(tableName = "meal_entries", indices = [Index("meal_at")])
 data class MealEntryEntity(
     @PrimaryKey val id: String,
@@ -18,6 +19,8 @@ data class MealEntryEntity(
     @ColumnInfo(name = "photo_path") val photoPath: String?,
     @ColumnInfo(name = "created_at") val createdAt: Long,
     @ColumnInfo(name = "updated_at") val updatedAt: Long,
+    @ColumnInfo(name = "food_emoji") val foodEmoji: String?,
+    @ColumnInfo(name = "is_representative", defaultValue = "0") val isRepresentative: Boolean,
 )
 
 @Entity(

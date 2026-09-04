@@ -1,13 +1,14 @@
 package com.devts.mymeal.feature.record
 
 import androidx.compose.runtime.Immutable
+import androidx.compose.ui.graphics.ImageBitmap
+import com.devts.mymeal.core.model.MealType
 import kotlin.time.Clock
 import kotlinx.datetime.LocalDate
 import kotlinx.datetime.LocalDateTime
 import kotlinx.datetime.LocalTime
 import kotlinx.datetime.TimeZone
 import kotlinx.datetime.toLocalDateTime
-import org.jetbrains.compose.resources.DrawableResource
 
 /**
  * 기록 생성/수정 화면 상태 (Figma 832:98315). 화면 구성 슬라이스 — 저장·사진·시간 선택과
@@ -19,7 +20,7 @@ data class RecordUiState(
     val date: LocalDate,
     val time: LocalTime,
     val slot: RecordSlot = RecordSlot.BREAKFAST, // 디자인 기본 선택 = 아침
-    val photo: DrawableResource? = null,         // null = 도시락 일러스트 자리표시자
+    val photo: ImageBitmap? = null,              // 선택한 사진 미리보기, null = 도시락 일러스트 자리표시자
     val foodEmoji: String? = null,               // 대표 음식(단일 선택), null = "?" 타일
     val isRepresentative: Boolean = false,
     val memo: String = "",
@@ -36,6 +37,9 @@ enum class RecordSlot(val label: String) {
     DINNER("🌑 저녁"),
     SNACK("🍰 간식"),
 }
+
+// 이름 1:1 매핑 — MealType도 4종 (SNACK 확정 2026-09-04)
+fun RecordSlot.toMealType(): MealType = MealType.valueOf(name)
 
 /** "2023년 6월 4일 일요일" — 요일은 날짜에서 파생 (디자인 샘플의 "금요일"은 불일치, 매니페스트 참조) */
 fun dateLabelOf(date: LocalDate): String =

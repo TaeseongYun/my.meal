@@ -28,7 +28,7 @@ class MealStorageTest {
     @AfterTest fun tearDown() { db.close() }
 
     private fun entry(id: String, mealAt: Long, items: List<MealItem> = emptyList(), photoPath: String? = null) =
-        MealEntry(id, mealAt, MealType.LUNCH, "메모", photoPath, 1L, 1L, items)
+        MealEntry(id, mealAt, MealType.LUNCH, "메모", photoPath, 1L, 1L, items, foodEmoji = "🍙", isRepresentative = true)
 
     // 2026-01-15 Asia/Seoul 자정 = 2026-01-14T15:00Z
     private val jan15start = 1768402800000L
@@ -41,6 +41,8 @@ class MealStorageTest {
         assertEquals(2, loaded.items.size)
         assertEquals("김밥", loaded.items[0].name)
         assertEquals(MealType.LUNCH, loaded.mealType) // v2: meal_type 왕복 보존
+        assertEquals("🍙", loaded.foodEmoji) // v3: food_emoji 왕복 보존
+        assertEquals(true, loaded.isRepresentative) // v3: is_representative 왕복 보존
 
         repo.upsert(entry("e1", jan15start + 1000, listOf(MealItem("i3", "라면", "한 그릇", 500, 0))))
         val replaced = assertNotNull(repo.get("e1"))
