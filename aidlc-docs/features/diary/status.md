@@ -1,11 +1,12 @@
 # Status — diary (F-5 홈 슬라이스)
 
 - Feature: diary
-- Status: **in-design** (STEP 4 답변 완료, GATE-2~5 대기)
+- Status: **구현 완료 — score loop COMPLETE**
+- Post-Implementation Score: **98/100** (round 1 — dependency-check.md 참조)
 - Request Type: prepared-requirement (로드맵 F-5 + 사용자 확정 범위: 홈 연결 슬라이스만, 2026-09-03)
 - Depth Level: standard
 - Project State: brownfield (F-0/F-1/F-2/홈 UI-slice 머지 완료)
-- Last Updated: 2026-09-03
+- Last Updated: 2026-09-04
 
 ## Roadmap Context
 - Roadmap Source: F-5 (`_roadmap.md`) — 이번 사이클은 조회 슬라이스만, 상세·수정·삭제는 잔여
@@ -26,4 +27,7 @@
 - [x] STEP 1~5 (prepared-requirement — 로드맵·홈 잔여 기반)
 - [x] STEP 4 질문 3건 답변 (Q1 mealType v2 / Q2 최신 1건 / Q3 스텁 세트 랜덤)
 - [x] STEP 6 (UOW D1~D3: M×3) / STEP 6.5 (technical-design.md — ADR 3건)
-- [ ] GATE-2·GATE-3·GATE-3.5·GATE-5 ← **일괄 제시 대기**
+- [x] GATE-2·3·3.5·5 일괄 승인 (2026-09-03)
+- [x] Q4 SNACK 추가 답변 (2026-09-04) — MealType 4종, 홈 캐러셀 3끼 고정
+- [x] UOW-D1~D3 구현 + main(record UI #7) 머지 반영
+- [x] ctx-score-loop round 1 — **98/100 COMPLETE** (Dependency 25 · Build 25 · Test 25 · AC 23)
