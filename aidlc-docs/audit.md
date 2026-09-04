@@ -524,3 +524,10 @@ Representative case: `ctx-aidlc-run` STEP 1-A detects multi-feature → guides r
 - Action: completed
 - Reason: Dependency 25/25 · Build 25/25 · Test 25/25 · AC 23/25 = 98/100 > 85 & 빌드 축 ≠ 0 (GR-1/GR-2 통과). 감점 −2: 라이브 Flow 갱신 육안 미검증(F-3 연결 시 자연 검증)·iOS 실행 육안 미검증(전례 준용). 루프 종료
 - Outputs: features/diary/dependency-check.md(round 1), status.md(점수 미러)
+
+## [STEP]+[LOOP] record(F-3) 데이터 연결 — round 1 COMPLETE
+- Timestamp: 2026-09-04T22:20:00+09:00
+- Feature: record
+- Action: completed
+- Reason: Dependency 25 · Build 25 · Test 25 · AC 21 = 96/100 > 85 (GR-1/GR-2 통과). 스키마 v3(Q4 답변)+TimePicker(Q5)+사진 expect/actual+저장 파이프라인+홈 foodEmoji 연동. 감점 −4: 사진 실선택 E2E·iOS 육안 미수행(사용자 지시로 세부 검증 중단 — 잔여 기록). core-ktx 1.19→1.18(compileSdk 36 호환, 구글 메이븐 검증)
+- Outputs: features/record/dependency-check.md(round 1), status.md, technical-design.md 개정

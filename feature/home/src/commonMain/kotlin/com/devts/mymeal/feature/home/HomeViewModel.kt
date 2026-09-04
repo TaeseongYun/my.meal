@@ -34,7 +34,10 @@ class HomeViewModel(
         )
 }
 
-/** 순수 매핑 — 테스트 대상. 마크·메뉴 이모지는 스텁 세트 결정적 랜덤 (사용자 결정 2026-09-03). */
+/**
+ * 순수 매핑 — 테스트 대상. 마크·메뉴 이모지는 기록의 대표 음식 이모지(food_emoji, v3) 우선,
+ * 없으면 스텁 세트 결정적 랜덤 (사용자 결정 2026-09-03/04).
+ */
 internal fun mapToHomeUiState(
     today: LocalDate,
     week: List<LocalDate>,
@@ -47,11 +50,10 @@ internal fun mapToHomeUiState(
         title = "${today.month.ordinal + 1}월의 도시락",
         weekLabel = weekLabelOf(week),
         weekDays = week.mapIndexed { i, date ->
-            val hasRecord = byDay.getOrNull(i).orEmpty().isNotEmpty()
             WeekDay(
                 dayNumber = date.day,
                 isToday = date == today,
-                markEmoji = if (hasRecord) STUB_MARKS[date.day % STUB_MARKS.size] else null,
+                markEmoji = dayMarkEmoji(byDay.getOrNull(i).orEmpty(), date.day),
             )
         },
         meals = CAROUSEL_TYPES.map { type ->
@@ -60,7 +62,7 @@ internal fun mapToHomeUiState(
                 type = type,
                 photoPath = entry?.photoPath,
                 note = entry?.note,
-                menuEmoji = entry?.let { STUB_MARKS[it.id.hashCode().mod(STUB_MARKS.size)] },
+                menuEmoji = entry?.let { it.foodEmoji ?: STUB_MARKS[it.id.hashCode().mod(STUB_MARKS.size)] },
                 time = entry?.let { formatMealTime(it.mealAt, timeZone) },
             )
         },
@@ -69,6 +71,14 @@ internal fun mapToHomeUiState(
 
 // 홈 캐러셀은 디자인(832:92613)대로 3끼만 — SNACK 기록은 캘린더 마크에만 반영
 private val CAROUSEL_TYPES = listOf(MealType.BREAKFAST, MealType.LUNCH, MealType.DINNER)
+
+/** 마크 규칙: 대표 게시물 이모지 → 최신 기록의 이모지 → 스텁 세트(날짜 기반). 기록 없으면 null("?"). */
+internal fun dayMarkEmoji(entries: List<MealEntry>, dayNumber: Int): String? {
+    if (entries.isEmpty()) return null
+    val representative = entries.filter { it.isRepresentative }.maxByOrNull { it.mealAt }?.foodEmoji
+    val latestWithEmoji = entries.sortedByDescending { it.mealAt }.firstNotNullOfOrNull { it.foodEmoji }
+    return representative ?: latestWithEmoji ?: STUB_MARKS[dayNumber % STUB_MARKS.size]
+}
 
 /** "오후 12:53" — 12시간제, 자정/정오는 12시로. */
 internal fun formatMealTime(epochMs: Long, timeZone: TimeZone): String {

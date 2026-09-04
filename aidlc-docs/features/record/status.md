@@ -2,7 +2,7 @@
 
 - Feature Slug: record (F-3) — **UI 슬라이스만 구현** (디자인 우선, 사용자 지시 2026-09-03)
 - Request Type: ui-first-slice (F-3 전체 범위의 화면 부분)
-- Current Phase: UI 구현 완료 — score loop COMPLETE
+- Current Phase: 데이터 연결 완료 — score loop COMPLETE (UI 98/100 → 데이터 연결 96/100)
 - Post-Implementation Score: **98/100** (round 1, COMPLETE — dependency-check.md 참조)
 - 구현 범위: `:feature:record` (RecordScreen/RecordUiState/RecordNavigation), Figma 832:98315.
   홈 FAB → 기록 화면 내비게이션 연결(F-1 NavHost 규약 준수)
@@ -17,4 +17,7 @@
   - 디자인 원본 JSON(manifest/tokens) 추출 — REST nodes API 429 해소 시
   - 디자이너 확인: 간식 슬롯 포함 여부, 이모지 9종 의미·선택 표시, 대표 게시물 동작, 날짜 요일 불일치 (design-manifest.md)
   - Canvas 근사 아이콘(←/›/카메라/체크) 렌더 크롭 교체 후보
-- Last Updated: 2026-09-03
+- 데이터 연결 (2026-09-04): RecordViewModel UDF+저장 파이프라인(uuid→PhotoStore→upsert, 실패 롤백),
+  사진 expect/actual(Android TakePicture/PickVisualMedia+FileProvider, iOS UIImagePicker),
+  Material3 TimePicker, 스키마 v3(food_emoji·is_representative)+홈 이모지 연동, recordModule Koin 등록
+- Last Updated: 2026-09-04
