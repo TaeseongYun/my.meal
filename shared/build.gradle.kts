@@ -43,9 +43,13 @@ kotlin {
         androidMain.dependencies {
             implementation(libs.compose.uiToolingPreview)
             implementation(libs.compose.uiTooling)
+            implementation(libs.koin.android)
         }
         commonMain.dependencies {
             implementation(project(":core:designsystem"))
+            implementation(project(":core:model"))
+            implementation(project(":core:data"))
+            implementation(libs.androidx.room.runtime) // MymealDatabase(RoomDatabase 상속) 참조에 필요
             implementation(project(":feature:login"))
             implementation(project(":feature:home"))
             implementation(project(":feature:record"))

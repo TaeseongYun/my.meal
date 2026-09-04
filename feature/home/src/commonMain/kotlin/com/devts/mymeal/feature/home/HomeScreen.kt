@@ -23,6 +23,7 @@ import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.HorizontalDivider
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.remember
 import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -42,7 +43,6 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.devts.mymeal.core.designsystem.SikdorokTheme
 import kotlinx.coroutines.launch
-import org.jetbrains.compose.resources.painterResource
 
 // 디자인 근거: Figma 832:92613 (홈 화면). 토큰 외 색·수치는 디자이너 확인 항목으로
 // design-manifest에 기록됨. 아이콘은 Canvas 근사 — 렌더 크롭 확보 시 교체 대상.
@@ -274,9 +274,10 @@ private fun PhotoFrame(slot: MealSlotState) {
                 .background(PhotoFrameGray)
                 .border(7.dp, HomeDark, RoundedCornerShape(9.dp)),
         ) {
-            if (slot.photo != null) {
+            val bitmap = slot.photoPath?.let { path -> remember(path) { decodeImageBitmap(path) } }
+            if (bitmap != null) {
                 Image(
-                    painterResource(slot.photo),
+                    bitmap,
                     contentDescription = "${slot.type.label} 도시락 사진",
                     modifier = Modifier.fillMaxSize(),
                     contentScale = ContentScale.Crop,

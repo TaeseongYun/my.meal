@@ -38,3 +38,7 @@
 - [x] GATE-5 승인 (2026-08-31, "둘 다 승인") → 워크트리 data-foundation에서 /ctx-run
 - [x] 구현 완료 (/ctx-run ROLE 0~6): UOW-1~4, 테스트 jvm 9/9 + iOS sim green, 전체 회귀 통과
 - [ ] 잔여: main 병합(PR), F-3 소비 시 android 런타임 실기 검증
+
+## 스키마 v2 (2026-09-03, F-5 diary 브랜치에서 F-2 소유 절차로 확장)
+- meal_entries.meal_type TEXT NOT NULL DEFAULT 'DINNER' + AutoMigration(1→2) + schemas/2.json export
+- 근거: F-5/F-3 공유 질문 Q1=A (사용자 결정) — features/diary/requirement-verification-questions.md

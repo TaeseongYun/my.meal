@@ -1,5 +1,6 @@
 package com.devts.mymeal.feature.home
 
+import com.devts.mymeal.core.model.MealType
 import kotlin.test.Test
 import kotlin.test.assertEquals
 import kotlin.test.assertNull

@@ -478,6 +478,12 @@ Representative case: `ctx-aidlc-run` STEP 1-A detects multi-feature → guides r
 - Reason: Dependency 25/25 · Build 25/25 · Test 25/25 · AC 23/25 = 98/100 > 85 & 빌드 축 ≠ 0 (GR-1/GR-2 통과). 증빙: f1-score-round1.log(FAILED 0), xcodebuild BUILD SUCCEEDED, 스크린샷 3종(Android login/home 전환, iOS login 렌더). 감점 −2: iOS 전환 탭 육안 미검증(simctl 터치 주입 미지원·osascript 접근성 권한 부재 — 공통 코드는 Android 검증). 루프 종료
 - Outputs: features/app-foundation/dependency-check.md(Score History round 1), status.md(점수 미러)
 
+## [GATE] diary(F-5 홈 슬라이스)·record(F-3) — GATE-2·3·3.5·5 일괄 승인
+- Timestamp: 2026-09-03T19:55:00+09:00
+- Feature: diary, record
+- Decision: approved / approved
+- User Input: "일괄 승인" ×2 (AskUserQuestion). STEP 4 답변: Q1 mealType 스키마 v2(공유), Q2 최신 1건, Q3 "디자인 샘플처럼 스텁 데이터를 랜덤으로"(커스텀), 사진 입력 expect/actual 직접
+- Notes: 실행 순서 — diary 선행(스키마 v2 포함) 구현·머지 → record 리베이스 후 구현 (Room 스키마 single-owner 충돌 차단). Readiness: diary 93 / record 91
 ## [STEP] record UI 슬라이스 Implementation — completed
 - Timestamp: 2026-09-03T19:50:00+09:00
 - Feature: record (F-3, UI 부분만)
@@ -494,3 +500,27 @@ Representative case: `ctx-aidlc-run` STEP 1-A detects multi-feature → guides r
 - Action: completed
 - Reason: Dependency 25/25 · Build 25/25 · Test 25/25 · AC 23/25 = 98/100 > 85 & 빌드 축 ≠ 0 (GR-1/GR-2 통과). 증빙: score-round1-tests.log(BUILD SUCCESSFUL, 경고 0), TEST-RecordUiStateTest.xml tests=7 failures=0 × Android host·iOS sim, 에뮬레이터 스크린샷 5종(로그인→홈→FAB→기록→인터랙션→뒤로가기). 감점 −2: 디자인 원본 JSON 미확보(429) + 간식 슬롯·이모지 선택 표시 임의 결정(디자이너 확인 대기). 루프 종료
 - Outputs: features/record/dependency-check.md(Score History round 1), status.md
+
+## [ANSWER] F-5/F-3 공유 — 간식(SNACK) 슬롯 확정
+- Timestamp: 2026-09-04T21:10:00+09:00
+- Feature: diary, record
+- Question: record UI 4칸(간식 포함) vs MealType 3종 충돌 (main 50bcc17 기록 항목)
+- User Input: "SNACK 추가" (AskUserQuestion, AI 추천 채택)
+- Impact: MealType 4종(BREAKFAST/LUNCH/DINNER/SNACK). 스키마 v2 변경 없음(TEXT 컬럼). 홈 캐러셀은 3끼 유지(CAROUSEL_TYPES), 간식은 캘린더 마크에만 반영. record 데이터 연결 시 RecordSlot↔MealType 직접 매핑 가능. [확신: 확실]
+
+## [STEP] diary(F-5 홈 슬라이스) Implementation — completed
+- Timestamp: 2026-09-04T21:50:00+09:00
+- Feature: diary
+- Step: UOW-D1~D3 구현
+- Action: completed
+- Reason: 스키마 v2(meal_type+AutoMigration+2.json), HomeViewModel(주간 7일 combine→매핑: 마크·메뉴 이모지 스텁 세트 결정적 랜덤, 끼니별 최신 1건, SNACK은 마크만), homeDestination 실데이터 연결(koinViewModel), 이미지 디코더 expect/actual(서드파티 0), shared DataModule(platform DB·PhotoStore·Repository). main(record UI #7) 머지 반영 — homeDestination(onNavigateToRecord) 시그니처 유지
+- 환경 수정: :core:data room-runtime api 승격(공개 API 노출), kotlin.daemon 힙 3072M→6144M (iOS 릴리스 링크 OOM 2회 재현 해소)
+- 검증: 전 테스트 green(f5-score-round1.log FAILED 0), 에뮬레이터 E2E — 기록 0건 전부 미등록 → DB 주입 후 캘린더 마크(🥗 간식일/🍚 오늘)·저녁 캐러셀(메모·오후 12:53) 표시·재실행 복원, 검증 후 DB 정리
+
+## [LOOP] diary — round 1 COMPLETE
+- Timestamp: 2026-09-04T21:50:00+09:00
+- Feature: diary
+- Step: ctx-score-loop round 1
+- Action: completed
+- Reason: Dependency 25/25 · Build 25/25 · Test 25/25 · AC 23/25 = 98/100 > 85 & 빌드 축 ≠ 0 (GR-1/GR-2 통과). 감점 −2: 라이브 Flow 갱신 육안 미검증(F-3 연결 시 자연 검증)·iOS 실행 육안 미검증(전례 준용). 루프 종료
+- Outputs: features/diary/dependency-check.md(round 1), status.md(점수 미러)

@@ -6,7 +6,7 @@ import kotlin.test.assertNull
 
 class MealEntryTest {
     private fun entry(items: List<MealItem>) =
-        MealEntry("e1", 0L, null, null, 0L, 0L, items)
+        MealEntry("e1", 0L, MealType.DINNER, null, null, 0L, 0L, items)
     private fun item(kcal: Int?, idx: Int = 0) =
         MealItem("i$idx", "밥", null, kcal, idx)
 

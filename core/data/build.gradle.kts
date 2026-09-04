@@ -27,7 +27,8 @@ kotlin {
     sourceSets {
         commonMain.dependencies {
             api(project(":core:model"))
-            implementation(libs.androidx.room.runtime)
+            // 공개 API(MymealDatabase·mymealDatabaseBuilder)가 RoomDatabase 타입을 노출 → api
+            api(libs.androidx.room.runtime)
             implementation(libs.androidx.sqlite.bundled)
             implementation(libs.kotlinx.datetime)
             implementation(libs.kotlinx.coroutines.core)

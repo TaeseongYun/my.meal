@@ -7,6 +7,7 @@ import com.devts.mymeal.core.data.db.MealItemEntity
 import com.devts.mymeal.core.data.photo.PhotoStore
 import com.devts.mymeal.core.model.MealEntry
 import com.devts.mymeal.core.model.MealItem
+import com.devts.mymeal.core.model.MealType
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.map
 import kotlinx.datetime.DateTimeUnit
@@ -42,6 +43,7 @@ class RoomMealRepository(
 private fun MealEntryWithItems.toModel() = MealEntry(
     id = entry.id,
     mealAt = entry.mealAt,
+    mealType = MealType.entries.firstOrNull { it.name == entry.mealType } ?: MealType.DINNER,
     note = entry.note,
     photoPath = entry.photoPath,
     createdAt = entry.createdAt,
@@ -49,5 +51,5 @@ private fun MealEntryWithItems.toModel() = MealEntry(
     items = items.sortedBy { it.orderIndex }.map { MealItem(it.id, it.name, it.amountLabel, it.estimatedKcal, it.orderIndex) },
 )
 
-private fun MealEntry.toEntity() = MealEntryEntity(id, mealAt, note, photoPath, createdAt, updatedAt)
+private fun MealEntry.toEntity() = MealEntryEntity(id, mealAt, mealType.name, note, photoPath, createdAt, updatedAt)
 private fun MealItem.toEntity(entryId: String) = MealItemEntity(id, entryId, name, amountLabel, estimatedKcal, orderIndex)

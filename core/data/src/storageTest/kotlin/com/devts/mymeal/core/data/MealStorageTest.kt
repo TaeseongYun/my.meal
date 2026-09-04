@@ -5,6 +5,7 @@ import com.devts.mymeal.core.data.db.mymealDatabase
 import com.devts.mymeal.core.data.photo.createPhotoStore
 import com.devts.mymeal.core.data.repository.RoomMealRepository
 import com.devts.mymeal.core.model.MealEntry
+import com.devts.mymeal.core.model.MealType
 import com.devts.mymeal.core.model.MealItem
 import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.test.runTest
@@ -27,7 +28,7 @@ class MealStorageTest {
     @AfterTest fun tearDown() { db.close() }
 
     private fun entry(id: String, mealAt: Long, items: List<MealItem> = emptyList(), photoPath: String? = null) =
-        MealEntry(id, mealAt, "메모", photoPath, 1L, 1L, items)
+        MealEntry(id, mealAt, MealType.LUNCH, "메모", photoPath, 1L, 1L, items)
 
     // 2026-01-15 Asia/Seoul 자정 = 2026-01-14T15:00Z
     private val jan15start = 1768402800000L
@@ -39,6 +40,7 @@ class MealStorageTest {
         val loaded = assertNotNull(repo.get("e1"))
         assertEquals(2, loaded.items.size)
         assertEquals("김밥", loaded.items[0].name)
+        assertEquals(MealType.LUNCH, loaded.mealType) // v2: meal_type 왕복 보존
 
         repo.upsert(entry("e1", jan15start + 1000, listOf(MealItem("i3", "라면", "한 그릇", 500, 0))))
         val replaced = assertNotNull(repo.get("e1"))
