@@ -1,5 +1,6 @@
 package com.devts.mymeal.feature.record
 
+import com.devts.mymeal.core.model.MealType
 import kotlin.test.Test
 import kotlin.test.assertEquals
 import kotlin.test.assertFalse
@@ -10,6 +11,12 @@ import kotlinx.datetime.LocalDateTime
 import kotlinx.datetime.LocalTime
 
 class RecordUiStateTest {
+
+    // toMealType()은 valueOf(name) 런타임 조회 — 이름이 어긋나면 저장 시점에 던진다
+    @Test
+    fun toMealType_mapsEverySlot() {
+        assertEquals(MealType.entries.toSet(), RecordSlot.entries.map { it.toMealType() }.toSet())
+    }
 
     @Test
     fun dateLabel_designSampleShape() {
