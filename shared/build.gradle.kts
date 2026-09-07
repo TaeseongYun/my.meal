@@ -49,6 +49,7 @@ kotlin {
             implementation(project(":core:designsystem"))
             implementation(project(":core:model"))
             implementation(project(":core:data"))
+            implementation(project(":core:auth"))
             implementation(libs.androidx.room.runtime) // MymealDatabase(RoomDatabase 상속) 참조에 필요
             implementation(project(":feature:login"))
             implementation(project(":feature:home"))
