@@ -1,5 +1,6 @@
 package com.devts.mymeal.di
 
+import com.devts.mymeal.core.auth.createAuthRepository
 import com.devts.mymeal.core.data.db.MymealDatabase
 import com.devts.mymeal.core.data.photo.PhotoStore
 import com.devts.mymeal.core.data.repository.MealRepository
@@ -15,5 +16,6 @@ internal fun dataModules(): List<Module> = listOf(
     platformDataModule(),
     module {
         single<MealRepository> { RoomMealRepository(get<MymealDatabase>().mealDao(), get<PhotoStore>()) }
+        single { createAuthRepository() }
     },
 )

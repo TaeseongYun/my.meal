@@ -31,6 +31,7 @@ kotlin {
     sourceSets {
         commonMain.dependencies {
             implementation(project(":core:designsystem"))
+            implementation(project(":core:auth"))
             implementation(libs.compose.runtime)
             implementation(libs.compose.foundation)
             implementation(libs.compose.material3)
@@ -38,8 +39,13 @@ kotlin {
             implementation(libs.compose.components.resources)
             implementation(libs.androidx.navigation.compose)
             implementation(libs.androidx.lifecycle.viewmodelCompose)
+            implementation(libs.androidx.lifecycle.runtimeCompose)
             implementation(libs.koin.compose.viewmodel)
             implementation(libs.kotlinx.serialization.core)
+            implementation(libs.kotlinx.coroutines.core)
+        }
+        androidMain.dependencies {
+            implementation(libs.kakao.user)
         }
         commonTest.dependencies {
             implementation(libs.kotlin.test)

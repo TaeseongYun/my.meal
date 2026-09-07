@@ -24,6 +24,9 @@ dependencyResolutionManagement {
             }
         }
         mavenCentral()
+        maven("https://devrepo.kakao.com/nexus/content/groups/public/") {
+            content { includeGroup("com.kakao.sdk") } // 카카오 SDK는 Maven Central에 없음
+        }
     }
 }
 
@@ -36,3 +39,4 @@ include(":core:model")
 include(":core:data")
 include(":feature:home")
 include(":feature:record")
+include(":core:auth")

@@ -22,6 +22,9 @@ navigationCompose = "2.9.2"
 koin = "4.2.2"
 kermit = "2.1.0"
 kotlinx-serialization = "1.11.0"
+supabase = "3.1.4"
+ktor = "3.1.2"
+kakao = "2.25.0"
 
 [libraries]
 kotlin-test = { module = "org.jetbrains.kotlin:kotlin-test", version.ref = "kotlin" }
@@ -37,6 +40,10 @@ koin-android = { module = "io.insert-koin:koin-android", version.ref = "koin" }
 koin-compose-viewmodel = { module = "io.insert-koin:koin-compose-viewmodel", version.ref = "koin" }
 kermit = { module = "co.touchlab:kermit", version.ref = "kermit" }
 kotlinx-serialization-core = { module = "org.jetbrains.kotlinx:kotlinx-serialization-core", version.ref = "kotlinx-serialization" }
+supabase-auth = { module = "io.github.jan-tennert.supabase:auth-kt", version.ref = "supabase" }
+ktor-client-okhttp = { module = "io.ktor:ktor-client-okhttp", version.ref = "ktor" }
+ktor-client-darwin = { module = "io.ktor:ktor-client-darwin", version.ref = "ktor" }
+kakao-user = { module = "com.kakao.sdk:v2-user", version.ref = "kakao" }
 kotlin-testJunit = { module = "org.jetbrains.kotlin:kotlin-test-junit", version.ref = "kotlin" }
 junit = { module = "junit:junit", version.ref = "junit" }
 androidx-core-ktx = { module = "androidx.core:core-ktx", version.ref = "androidx-core" }
