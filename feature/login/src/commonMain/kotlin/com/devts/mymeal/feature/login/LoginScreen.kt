@@ -39,6 +39,7 @@ private val EmailButtonDark = Color(0xFF222222)
 
 @Composable
 fun LoginScreen(
+    errorMessage: String? = null,
     onKakaoClick: () -> Unit = {},
     onEmailClick: () -> Unit = {},
     modifier: Modifier = Modifier,
@@ -77,6 +78,10 @@ fun LoginScreen(
             modifier = Modifier.fillMaxWidth(0.82f),
         )
         Spacer(Modifier.weight(1f))
+        if (errorMessage != null) {
+            Text(errorMessage, style = t.body2, color = c.alertRed, textAlign = TextAlign.Center)
+            Spacer(Modifier.height(s.s12))
+        }
         LoginButton(
             text = "카카오로 로그인",
             textColor = c.text4,

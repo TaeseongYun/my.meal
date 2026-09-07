@@ -8,12 +8,15 @@ import androidx.navigation.navOptions
 import com.devts.mymeal.core.designsystem.SikdorokTheme
 import com.devts.mymeal.feature.home.HomeRoute
 import com.devts.mymeal.feature.home.homeDestination
+import com.devts.mymeal.feature.login.EmailAuthMode
+import com.devts.mymeal.feature.login.EmailAuthRoute
 import com.devts.mymeal.feature.login.LoginRoute
+import com.devts.mymeal.feature.login.emailAuthDestination
 import com.devts.mymeal.feature.login.loginDestination
 import com.devts.mymeal.feature.record.RecordRoute
 import com.devts.mymeal.feature.record.recordDestination
 
-// 첫 화면 = 로그인 (Figma 832:48657) → 로그인 액션 시 홈 (Figma 832:92613).
+// 첫 화면 = 로그인 (Figma 832:48657) → 이메일 인증 (Figma 832:106628) 또는 홈 (Figma 832:92613).
 // 홈 FAB → 기록 생성/수정 (Figma 832:98315). 홈·기록 데이터는 화면 구성 스텁 — F-2/F-5에서 연결.
 @Composable
 @Preview
@@ -21,13 +24,20 @@ fun App() {
     SikdorokTheme {
         val navController = rememberNavController()
         NavHost(navController = navController, startDestination = LoginRoute) {
+            val toHome = {
+                navController.navigate(
+                    HomeRoute,
+                    navOptions { popUpTo<LoginRoute> { inclusive = true } }, // 인증 화면은 백스택에서 제거
+                )
+            }
             loginDestination(
-                onNavigateToHome = {
-                    navController.navigate(
-                        HomeRoute,
-                        navOptions { popUpTo<LoginRoute> { inclusive = true } }, // 로그인은 백스택에서 제거
-                    )
-                },
+                onNavigateToHome = toHome,
+                onNavigateToEmailAuth = { mode -> navController.navigate(EmailAuthRoute(mode.name)) },
+            )
+            emailAuthDestination(
+                onNavigateToHome = toHome,
+                onNavigateToSignUp = { navController.navigate(EmailAuthRoute(EmailAuthMode.SIGN_UP.name)) },
+                onBack = { navController.popBackStack() },
             )
             homeDestination(onNavigateToRecord = { navController.navigate(RecordRoute) })
             recordDestination(onBack = { navController.popBackStack() })
