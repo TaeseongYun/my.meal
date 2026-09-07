@@ -24,7 +24,7 @@ android {
     compileSdk = libs.versions.android.compileSdk.get().toInt()
 
     defaultConfig {
-        applicationId = "com.devts.mymeal.catalog"
+        applicationId = "com.tsdev.sikdorok.catalog" // androidApp과 동일한 applicationId 체계
         minSdk = libs.versions.android.minSdk.get().toInt()
         targetSdk = libs.versions.android.targetSdk.get().toInt()
         versionCode = 1
