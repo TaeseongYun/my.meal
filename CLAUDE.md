@@ -30,3 +30,6 @@ Audit loop: /ctx-hallucination-audit (run until Hallucination-Free Score ≥ 87)
   graphify 재설치 시 이 파일이 사라지므로 그래프가 비면 먼저 이 경로를 확인한다.
 - 설명·라벨은 어시스턴트 2단계: `graphify update .` → `.graphify/description-instructions/batch-*.json`과
   `label-instructions/communities.json`을 채움 → 재실행해 반영. 언어는 `--description-lang ko`로 지정(자동 감지가 오작동).
+- **주의**: 토폴로지가 바뀌는 재생성은 기존 노드 설명을 전부 날린다. `.graphify/<날짜>/` 백업이 남지만
+  이미 비워진 상태가 떠질 수 있어 복원이 보장되지 않는다. 재생성 직후 커버리지
+  (`graphify summary` 또는 graph.json의 description 개수)를 반드시 확인하고, 비었으면 배치를 다시 채운다.
