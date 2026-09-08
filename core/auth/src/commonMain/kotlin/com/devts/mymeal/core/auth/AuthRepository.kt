@@ -2,6 +2,7 @@ package com.devts.mymeal.core.auth
 
 import io.github.jan.supabase.SupabaseClient
 import io.github.jan.supabase.auth.Auth
+import io.github.jan.supabase.auth.OtpType
 import io.github.jan.supabase.auth.auth
 import io.github.jan.supabase.auth.providers.Kakao
 import io.github.jan.supabase.auth.providers.builtin.Email
@@ -17,6 +18,15 @@ interface AuthRepository {
     suspend fun signUpWithEmail(email: String, password: String)
 
     suspend fun signInWithEmail(email: String, password: String)
+
+    /**
+     * 가입 확인 메일의 6자리 코드를 검증한다. 성공하면 세션이 발급돼 저장된다.
+     * 메일 본문에 `{{ .Token }}`이 있어야 코드가 오고, 없으면 링크만 온다 (대시보드 템플릿 설정).
+     */
+    suspend fun verifyEmailCode(email: String, code: String)
+
+    /** 가입 확인 코드를 다시 보낸다. */
+    suspend fun resendSignUpCode(email: String)
 
     /** 카카오 OIDC id_token 교환. 같은 이메일의 기존 계정이 있으면 Supabase가 자동 연동한다. */
     suspend fun signInWithKakao(idToken: String)
@@ -70,6 +80,16 @@ internal class SupabaseAuthRepository : AuthRepository {
             this.email = email
             this.password = password
         }
+    }
+
+    override suspend fun verifyEmailCode(email: String, code: String) {
+        // Email.EMAIL은 signup·magiclink 토큰을 모두 커버한다 (OtpType.Email KDoc).
+        // 반환값 OtpVerifyResult는 무시 — 세션 저장은 라이브러리가 하고, 호출부는 currentTokens()로 판정한다.
+        client.auth.verifyEmailOtp(OtpType.Email.EMAIL, email, code)
+    }
+
+    override suspend fun resendSignUpCode(email: String) {
+        client.auth.resendEmail(OtpType.Email.SIGNUP, email)
     }
 
     override suspend fun signInWithKakao(idToken: String) {
