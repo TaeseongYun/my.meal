@@ -10,7 +10,7 @@
 - **Room KMP**: meal_entries / meal_items 스키마·DAO (Q2·Q3에서 필드 확정)
 - **이미지 파일 저장소**: 앱 내부 저장, DB에는 경로/메타만 (원본 Bitmap 저장 금지)
 - **repository 인터페이스**: 기록 CRUD + 조회(날짜별) — 도메인 모델은 플랫폼 타입 무참조
-- **모듈**: `:core:model`(도메인 모델) + `:core:data`(Room·이미지 저장·repository) — Q1=B 확정 (DroidKaigi 동형)
+- **모듈**: `:core:model`(도메인 모델) + `:core:data`(Room·이미지 저장·repository) — Q1=B 확정
 - **commonTest**: DAO/repository 단위 테스트 (kotlin.test + kotlinx-coroutines-test)
 - **버전 카탈로그**: room/sqlite 신규 항목 (버전 구현 시점 검증)
 

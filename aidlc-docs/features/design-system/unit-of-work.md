@@ -2,7 +2,7 @@
 
 > **Request Anchor**: 피그마 스타일 가이드(node 836:33127) 매니페스트를 기반으로 KMP 디자인 시스템 파운데이션을 `:core:designsystem` 모듈로 구축한다.
 
-구조 참고: DroidKaigi conference-app-2026의 `core/designsystem` 패턴 (GATE-2.7에서 사용자 확정, 2026-08-27).
+구조: 톱레벨 `core/designsystem` 모듈 패턴 (GATE-2.7에서 사용자 확정, 2026-08-27).
 
 ## UOW 목록
 

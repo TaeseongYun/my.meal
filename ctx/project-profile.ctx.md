@@ -42,16 +42,11 @@
 
 ## Gradle 구조 원칙 (ADR-0001로 개정, 2026-08-31)
 
-- **DroidKaigi식 모듈 구조**: `:core:<name>`(공유 기반) / `:feature:<slug>`(화면 피처) / `shared`(조립 루트 + iOS framework) / 얇은 호스트 앱(androidApp·iosApp·catalogApp)
+- **core/feature 모듈 구조**: `:core:<name>`(공유 기반) / `:feature:<slug>`(화면 피처) / `shared`(조립 루트 + iOS framework) / 얇은 호스트 앱(androidApp·iosApp·catalogApp)
 - 각 피처는 **착수 시점**에 `:feature:<slug>` 모듈로 생성하라 — 빈 모듈 선행 스캐폴딩 금지
 - feature 모듈 간 직접 의존 금지 — 교차 재사용은 `:core:*`로 승격하라
 - data 계층 모듈(:core:data 등)은 실제 책임이 생길 때 분리를 판단하라 (F-2 기술 설계)
-- 상세 근거: aidlc-docs/adr/0001-droidkaigi-module-structure.md
-
-## 참고 프로젝트
-
-- DroidKaigi/conference-app-2026 (main 112f35c): source set 분리, 얇은 플랫폼 진입점, feature 간 직접 의존 금지, app layer 조립 원칙**만** 참고하라
-- Metro, Soil, 자체 FIR Compiler Plugin, 자체 KSP Processor, 3단 Preview 모듈, Desktop/Web 타깃은 복사하지 마라
+- 상세 근거: aidlc-docs/adr/0001-core-feature-module-structure.md
 
 ## Forbidden Decisions
 
