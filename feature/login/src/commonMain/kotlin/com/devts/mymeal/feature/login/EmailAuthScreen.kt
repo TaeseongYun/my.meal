@@ -113,6 +113,10 @@ fun EmailAuthScreen(
                 Spacer(Modifier.height(s.s8))
                 Text(state.errorMessage, style = t.body2, color = c.alertRed)
             }
+            if (state.noticeMessage != null) {
+                Spacer(Modifier.height(s.s8))
+                Text(state.noticeMessage, style = t.body2, color = c.alertGreen)
+            }
             Spacer(Modifier.height(s.s32))
             Box(
                 modifier = Modifier

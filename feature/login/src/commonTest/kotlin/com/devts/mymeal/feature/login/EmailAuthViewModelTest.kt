@@ -65,13 +65,17 @@ class EmailAuthViewModelTest {
     }
 
     @Test
-    fun signUp_withoutAutoSession_signsInAfterSignUp() = runTest(dispatcher.scheduler) {
+    fun signUp_withoutAutoSession_showsConfirmNoticeInsteadOfSigningIn() = runTest(dispatcher.scheduler) {
+        // 이메일 확인이 켜진 프로젝트: 가입 직후 세션이 없다 (실측 2026-09-08)
         repository.sessionAfterSignUp = false
         val vm = viewModel(EmailAuthMode.SIGN_UP)
         vm.fillValidForm()
         vm.onAction(EmailAuthAction.Submit)
-        assertEquals(EmailAuthEffect.NavigateToHome, vm.effects.first())
-        assertEquals(listOf("signUp:sikdorok@naver.com", "signIn:sikdorok@naver.com"), repository.calls)
+        advanceUntilIdle()
+        assertEquals(listOf("signUp:sikdorok@naver.com"), repository.calls)
+        assertEquals(CONFIRM_EMAIL_NOTICE, vm.uiState.value.noticeMessage)
+        assertEquals(null, vm.uiState.value.errorMessage)
+        assertFalse(vm.uiState.value.isLoading)
     }
 
     @Test

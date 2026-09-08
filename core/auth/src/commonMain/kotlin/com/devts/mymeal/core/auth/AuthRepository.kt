@@ -7,6 +7,7 @@ import io.github.jan.supabase.auth.providers.Kakao
 import io.github.jan.supabase.auth.providers.builtin.Email
 import io.github.jan.supabase.auth.providers.builtin.IDToken
 import io.github.jan.supabase.createSupabaseClient
+import kotlin.time.Duration.Companion.seconds
 
 /** 로그인으로 발급된 토큰. 저장·자동 갱신은 supabase-kt가 담당한다. */
 data class AuthTokens(val accessToken: String, val refreshToken: String)
@@ -26,6 +27,12 @@ interface AuthRepository {
     /** 로그인 후에도 이메일이 없는 상태 = 이메일/비밀번호를 추가로 받아야 한다. */
     fun needsEmailLink(): Boolean
 
+    /**
+     * 저장소(안드로이드는 SharedPreferences)에서 세션 복원이 끝날 때까지 기다린 뒤 로그인 여부를 준다.
+     * 자동 로그인 판정용 — 앱 시작 시 시작 화면을 고르는 데 쓴다.
+     */
+    suspend fun hasValidSession(): Boolean
+
     fun currentTokens(): AuthTokens?
 
     suspend fun signOut()
@@ -42,7 +49,11 @@ internal class SupabaseAuthRepository : AuthRepository {
             supabaseUrl = AuthConfig.SUPABASE_URL,
             supabaseKey = AuthConfig.SUPABASE_ANON_KEY,
         ) {
+            // 기본 10초는 가입에 빠듯하다 — 이메일 확인이 켜져 있으면 서버가 확인 메일을 보내는
+            // 동안 응답을 붙들어 실측 3.0~3.1s가 나온다(2026-09-08 auth 로그). 느린 회선에서 초과.
+            requestTimeout = 30.seconds
             // 세션(액세스/리프레시 토큰) 저장과 만료 전 자동 갱신은 Auth 플러그인이 처리한다.
+            // autoLoadFromStorage 기본값 true → 앱 재시작 시 저장된 세션을 자동 복원한다.
             install(Auth)
         }
     }
@@ -76,6 +87,11 @@ internal class SupabaseAuthRepository : AuthRepository {
     }
 
     override fun needsEmailLink(): Boolean = client.auth.currentUserOrNull()?.email.isNullOrBlank()
+
+    override suspend fun hasValidSession(): Boolean {
+        client.auth.awaitInitialization() // 저장소 복원·최초 갱신이 끝날 때까지 대기
+        return client.auth.currentSessionOrNull() != null
+    }
 
     override fun currentTokens(): AuthTokens? = client.auth.currentSessionOrNull()?.let {
         AuthTokens(accessToken = it.accessToken, refreshToken = it.refreshToken)
