@@ -13,7 +13,7 @@
 ## 1. Design Overview
 
 - Target system/module: 신규 `:core:designsystem` (KMP, android + iosArm64 + iosSimulatorArm64)
-- Design direction: 피그마 매니페스트 값을 불변 토큰 클래스로 옮기고, CompositionLocal로 노출. MaterialTheme 브리지는 순수 함수로 분리해 컴포지션 없이 테스트 가능하게 한다. 구조는 DroidKaigi conference-app-2026의 core/designsystem 패턴을 따른다 (GATE-2.7 확정).
+- Design direction: 피그마 매니페스트 값을 불변 토큰 클래스로 옮기고, CompositionLocal로 노출. MaterialTheme 브리지는 순수 함수로 분리해 컴포지션 없이 테스트 가능하게 한다. 구조는 톱레벨 core/designsystem 모듈 패턴을 따른다 (GATE-2.7 확정).
 - brownfield touchpoints: `settings.gradle.kts`(include 추가), `shared/build.gradle.kts`(의존 추가), `shared App.kt`(테마 래핑) — 3곳뿐
 
 ## 2. Architecture Decisions
@@ -55,7 +55,7 @@ HTTP API 없음. 공개 Kotlin API (패키지 `com.devts.mymeal.core.designsyste
 ```kotlin
 @Composable fun SikdorokTheme(content: @Composable () -> Unit)
 
-object SikdorokTheme {  // 접근자 (companion 아닌 동명 object — DroidKaigi/M3 관례)
+object SikdorokTheme {  // 접근자 (companion 아닌 동명 object — M3 관례)
     val colors: SikdorokColors        @Composable get
     val typography: SikdorokTypography @Composable get
     val spacing: SikdorokSpacing       @Composable get
