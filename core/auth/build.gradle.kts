@@ -82,6 +82,11 @@ kotlin {
         commonTest.dependencies {
             implementation(libs.kotlin.test)
             implementation(libs.kotlinx.coroutines.test)
+            // 실경로 스모크(SupabaseWireSmokeTest)가 supabase-kt의 진짜 직렬화기를 돌린다.
+            // kotlinx-datetime을 여기서 명시하는 이유: :core:auth 단독으로는 supabase가 끌고 오는
+            // 0.6.2로 해석돼 앱(다른 모듈이 카탈로그 0.8.0으로 올림)과 클래스패스가 달라진다.
+            implementation(libs.kotlinx.serialization.json)
+            implementation(libs.kotlinx.datetime)
         }
     }
 }
