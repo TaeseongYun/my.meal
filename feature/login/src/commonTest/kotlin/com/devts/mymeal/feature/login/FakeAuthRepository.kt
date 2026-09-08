@@ -29,6 +29,8 @@ class FakeAuthRepository(
 
     override fun needsEmailLink(): Boolean = emailMissingAfterKakao
 
+    override suspend fun hasValidSession(): Boolean = currentTokens() != null
+
     override fun currentTokens(): AuthTokens? =
         if (signedUp && !sessionAfterSignUp) null else AuthTokens("access", "refresh")
 

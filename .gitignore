@@ -22,4 +22,5 @@ node_modules/
 # graphify code-graph output (per-worktree, not shared)
 graphify-out/
 .graphify/
-graphify-out
+.mcp.json
+
