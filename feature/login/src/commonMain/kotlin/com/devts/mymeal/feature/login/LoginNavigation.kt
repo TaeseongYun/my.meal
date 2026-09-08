@@ -68,8 +68,12 @@ fun NavGraphBuilder.emailAuthDestination(
             onEmailChange = { viewModel.onAction(EmailAuthAction.EditEmail(it)) },
             onPasswordChange = { viewModel.onAction(EmailAuthAction.EditPassword(it)) },
             onSubmit = { viewModel.onAction(EmailAuthAction.Submit) },
-            onBack = onBack,
+            // 코드 단계에서의 뒤로가기는 화면을 떠나는 게 아니라 입력 폼으로 되돌린다.
+            onBack = { if (state.codeSentTo != null) viewModel.onAction(EmailAuthAction.BackToForm) else onBack() },
             onSwitchToSignUp = onNavigateToSignUp,
+            onDigit = { viewModel.onAction(EmailAuthAction.AppendDigit(it)) },
+            onDelete = { viewModel.onAction(EmailAuthAction.DeleteDigit) },
+            onResend = { viewModel.onAction(EmailAuthAction.ResendCode) },
         )
     }
 }
