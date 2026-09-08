@@ -32,6 +32,10 @@
 | `mailer_autoconfirm` | `false` (Confirm email ON) | 가입 즉시 세션이 나와 코드 화면에 도달하지 않는다 |
 | Confirm signup 템플릿 | `{{ .Token }}` 포함 | 메일에 숫자가 안 실리고 링크만 온다 |
 | `mailer_otp_length` | `6` | 앱의 `CODE_LENGTH = 6`과 어긋나 자동 검증이 영영 안 걸린다 (도입 시점 값은 **8**이었다) |
+| `rate_limit_email_sent` | `30` (시간당) | 시간당 그 수만큼만 가입이 된다. 내장 SMTP 시절 기본값 **2**가 남아 있었고, 커스텀 SMTP를 붙여도 자동으로 안 오른다 |
+
+`smtp_max_frequency`는 `60`이다 — **같은 주소로** 재발송하는 최소 간격(초)이고, 앱의 재전송 쿨다운
+`RESEND_COOLDOWN_SECONDS = 60`과 맞춰둔 값이다. 서로 다른 사용자 사이에는 걸리지 않는다.
 
 확인: `curl "$SUPABASE_URL/auth/v1/settings" -H "apikey: $ANON"` 로 `mailer_autoconfirm`을 볼 수 있다.
 템플릿과 OTP 길이는 Management API(`GET /v1/projects/{ref}/config/auth`, PAT 필요)에서 읽는다.
