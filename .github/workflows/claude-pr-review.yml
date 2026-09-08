@@ -1,0 +1,107 @@
+name: claude-pr-review
+
+# PR이 열리면 리뷰 티어(T0/T1/T2)를 diff 경로로 판정하고, 티어에 맞는 강도로 리뷰한다.
+# 규칙 원본: CLAUDE.md "Review Tier & PR 규율", .github/pull_request_template.md
+#
+# KMP 빌드·테스트는 여기서 돌리지 않는다 — ubuntu 러너의 Android 콜드 빌드는 10분 단위이고
+# iOS 컴파일은 macOS 러너(과금)가 필요하다. 로컬 스코어 루프가 더 싸고 빠르다. CI는 diff 리뷰만.
+
+on:
+  pull_request:
+    types: [opened, synchronize, ready_for_review, reopened]
+
+# 같은 PR에 푸시가 연달아 오면 이전 리뷰는 취소한다 (중복 코멘트 방지)
+concurrency:
+  group: claude-review-${{ github.event.pull_request.number }}
+  cancel-in-progress: true
+
+jobs:
+  review:
+    if: github.event.pull_request.draft == false
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      pull-requests: write
+      id-token: write
+    steps:
+      - uses: actions/checkout@v6
+        with:
+          fetch-depth: 0 # 티어 판정에 base와의 diff가 필요하다
+
+      - name: 리뷰 티어 판정
+        id: tier
+        run: |
+          BASE="origin/${{ github.base_ref }}"
+          FILES=$(git diff --name-only "$BASE"...HEAD)
+          echo "변경 파일:"; echo "$FILES"
+
+          # T2 — 되돌리기 어렵거나 런타임에만 드러나는 변경
+          # (settings.gradle.kts / */build.gradle.kts는 제외: 모든 feat PR이 모듈 배선으로 건드린다)
+          if echo "$FILES" | grep -qE '^(gradle/libs\.versions\.toml|gradle\.properties|core/data/schemas/|supabase/migrations/|core/auth/|.*/(androidMain|iosMain)/|.*AndroidManifest\.xml)'; then
+            TIER=T2
+          # T0 — 문서·CTX·테스트만
+          elif [ -z "$(echo "$FILES" | grep -vE '^(aidlc-docs/|ctx/|.*\.md$|.*Test\.kt$)')" ]; then
+            TIER=T0
+          else
+            TIER=T1
+          fi
+
+          ADDED=$(git diff --numstat "$BASE"...HEAD | awk '{s+=$1} END {print s+0}')
+          COUNT=$(echo "$FILES" | grep -c . || true)
+
+          echo "tier=$TIER" >> "$GITHUB_OUTPUT"
+          echo "added=$ADDED" >> "$GITHUB_OUTPUT"
+          echo "files=$COUNT" >> "$GITHUB_OUTPUT"
+          echo "### Tier \`$TIER\` · +$ADDED lines · $COUNT files" >> "$GITHUB_STEP_SUMMARY"
+
+      - name: Claude 리뷰
+        uses: anthropics/claude-code-action@v1
+        with:
+          # /install-github-app 이 넣어주는 시크릿. API 키를 쓰면 anthropic_api_key 로 바꿀 것.
+          claude_code_oauth_token: ${{ secrets.CLAUDE_CODE_OAUTH_TOKEN }}
+          track_progress: true
+          use_sticky_comment: true
+          prompt: |
+            REPO: ${{ github.repository }}
+            PR NUMBER: ${{ github.event.pull_request.number }}
+            리뷰 티어: ${{ steps.tier.outputs.tier }}
+            변경 규모: +${{ steps.tier.outputs.added }} 라인 / ${{ steps.tier.outputs.files }} 파일
+
+            한국어로 리뷰하라. 이 저장소의 리뷰 규칙은 CLAUDE.md의 "Review Tier & PR 규율" 절에 있다.
+            `gh pr diff`로 변경분을 읽고, 아래 티어에 해당하는 항목만 본다.
+
+            ## 티어별 리뷰 강도
+
+            - **T0** (문서·CTX·테스트만): 사실관계 오류와 저장소 상태와의 불일치만 본다.
+              문장 다듬기나 구성 제안은 하지 마라.
+            - **T1** (피처 코드): 정확성 결함을 우선하고, 그 다음 재사용·단순화를 본다.
+              `ctx/INDEX.md`의 Constraints 위반(색·치수·TextStyle 리터럴 하드코딩, 피처 간 직접 의존,
+              destination/Koin module 외 공개 API)을 별도 항목으로 지적하라.
+            - **T2** (버전·스키마·마이그레이션·`core/auth`·플랫폼 소스셋·Manifest):
+              위 전부에 더해 아래를 반드시 확인하고, 확인 결과를 각각 한 줄로 보고하라.
+              1. `gradle/libs.versions.toml` 버전 변경이 있는가? 있다면 그 라이브러리를 **실제로 실행하는**
+                 테스트가 이 PR에 있는가. 페이크만 치는 테스트는 이 항목을 충족하지 않는다.
+                 (근거: PR #11에서 supabase-kt 3.1.4 × kotlinx-datetime 0.8.0 비호환이 런타임에만 터졌고,
+                 컴파일·단위 테스트·정적 리뷰가 전부 놓쳤다)
+              2. Room `version` 증가에 `core/data/schemas/<n>.json` export가 동반됐는가.
+              3. `supabase/migrations/*.sql`이 있다면 롤백 경로가 PR 본문에 적혔는가.
+              4. 상태관리·DI·네트워크·DB·백엔드 스택 변경에 ADR이 있는가. 없으면 **머지 보류**를 명시하라.
+              5. diff에 URL·키·토큰 리터럴이 있는가.
+
+            ## 크기 규율
+
+            추가 ≤600줄 / 파일 ≤20개를 넘으면 그 사실만 한 줄로 알리고, 어디서 슬라이스를 나눌 수 있는지
+            한 줄로 제안하라. `gradle/libs.versions.toml`의 버전 변경이 피처 코드와 같은 PR에 있으면
+            분리를 요구하라.
+
+            ## 보고 방식
+
+            - 구체적 결함은 인라인 코멘트로, 총평은 최상위 코멘트 하나로 남긴다.
+            - **재현 시나리오(어떤 입력·상태에서 무엇이 잘못되는지)를 쓸 수 없는 지적은 하지 마라.**
+            - 런타임에서만 드러나는 결함(실기기 실행이 필요한 것)은 "CI가 확인 불가 — 골든패스 필요"로
+              분류해 사람이 볼 항목에 남겨라. 확인한 척하지 마라.
+            - 대시보드·외부 서비스 설정처럼 코드 밖 자원은 리뷰 대상이 아니다. PR 본문 "남은 항목"에
+              적혀 있는지만 확인하라.
+
+          claude_args: |
+            --allowedTools "mcp__github_inline_comment__create_inline_comment,Bash(gh pr comment:*),Bash(gh pr diff:*),Bash(gh pr view:*),Read,Grep,Glob"
