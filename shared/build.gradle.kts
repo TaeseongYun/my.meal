@@ -54,6 +54,7 @@ kotlin {
             implementation(project(":feature:login"))
             implementation(project(":feature:home"))
             implementation(project(":feature:record"))
+            implementation(project(":feature:settings"))
             implementation(libs.compose.runtime)
             implementation(libs.compose.foundation)
             implementation(libs.compose.material3)
