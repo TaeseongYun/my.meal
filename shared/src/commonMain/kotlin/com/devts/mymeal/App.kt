@@ -21,6 +21,8 @@ import com.devts.mymeal.feature.login.emailAuthDestination
 import com.devts.mymeal.feature.login.loginDestination
 import com.devts.mymeal.feature.record.RecordRoute
 import com.devts.mymeal.feature.record.recordDestination
+import com.devts.mymeal.feature.settings.SettingsRoute
+import com.devts.mymeal.feature.settings.settingsDestination
 import org.koin.core.context.GlobalContext
 
 // 첫 화면 = 로그인 (Figma 832:48657) → 이메일 인증 (Figma 832:106628) 또는 홈 (Figma 832:92613).
@@ -55,8 +57,12 @@ fun App() {
                 onNavigateToSignUp = { navController.navigate(EmailAuthRoute(EmailAuthMode.SIGN_UP.name)) },
                 onBack = { navController.popBackStack() },
             )
-            homeDestination(onNavigateToRecord = { navController.navigate(RecordRoute) })
+            homeDestination(
+                onNavigateToRecord = { navController.navigate(RecordRoute) },
+                onNavigateToSettings = { navController.navigate(SettingsRoute) },
+            )
             recordDestination(onBack = { navController.popBackStack() })
+            settingsDestination(onBack = { navController.popBackStack() })
         }
     }
 }

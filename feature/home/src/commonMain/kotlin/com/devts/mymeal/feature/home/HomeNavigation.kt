@@ -10,10 +10,17 @@ import org.koin.compose.viewmodel.koinViewModel
 @Serializable
 data object HomeRoute
 
-fun NavGraphBuilder.homeDestination(onNavigateToRecord: () -> Unit) {
+fun NavGraphBuilder.homeDestination(
+    onNavigateToRecord: () -> Unit,
+    onNavigateToSettings: () -> Unit,
+) {
     composable<HomeRoute> {
         val viewModel = koinViewModel<HomeViewModel>()
         val state by viewModel.uiState.collectAsStateWithLifecycle()
-        HomeScreen(state = state, onEditClick = onNavigateToRecord)
+        HomeScreen(
+            state = state,
+            onEditClick = onNavigateToRecord,
+            onSettingsClick = onNavigateToSettings,
+        )
     }
 }
